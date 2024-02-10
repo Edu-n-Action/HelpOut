@@ -16,6 +16,9 @@ module.exports = {
         greenYellow: "#CEFD4A",
       },
     },
+    fontFamily: {
+      product: ['"Product Sans"', "Poppins"],
+    },
   },
   plugins: [],
 };
