@@ -1,4 +1,4 @@
-import FormData from "./formData";
+// import FormData from "./formData";
 import Image from "next/image";
 
 const EventHome = () => {
@@ -10,9 +10,7 @@ const EventHome = () => {
           <h1 className="text-[7.5vw] md:text-[3vw] text-product text-center">
             {first ? <>Create Profile</> : <>Edit Profile</>}
           </h1>
-          <div className="aspect-[379/759] w-[100%]">
-            <FormData />
-          </div>
+          <div className="aspect-[379/759] w-[100%]">{/* <FormData /> */}</div>
         </div>
       </div>
     </div>
