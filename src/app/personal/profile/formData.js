@@ -1,5 +1,6 @@
 "use client";
 
+import InputImage from "@/components/common/inputImage/inputImage";
 import Image from "next/image";
 
 export default function FormData(submit) {
@@ -22,16 +23,11 @@ export default function FormData(submit) {
       onSubmit={tes}
       className="flex flex-col aspect-[379/609] w-[100%] justify-around items-center"
     >
-      <div className="relative aspect-[1/1] w-[30%] flex flex-row bg-greydef justify-center items-center rounded-[15%/15%]">
-        <div className="absolute aspect-[1/1] w-[30%]">
-          <Image src={"/icon/add-photo.svg"} alt="add" fill />
-        </div>
-        <input
-          type="file"
-          className="w-full h-full opacity-0"
-          accept="image/jpeg, image/png image/jpg"
-        />
-      </div>
+      <InputImage
+        className="aspect-[1/1] w-[30%] rounded-[15%/15%]"
+        add={true}
+      />
+
       <div className="flex flex-col aspect-[379/496] w-[100%] justify-around">
         {data.map((item, index) => {
           return (
