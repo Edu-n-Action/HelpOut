@@ -72,7 +72,7 @@ export default function FormData(submit) {
           <input
             type="submit"
             value="Submit"
-            className="bg-greenYellow rounded-[4%/10%] w-[48%] aspect-[180/60] focus:bg-[lightgreen]"
+            className="bg-greenYellow rounded-[4%/10%] w-[48%] aspect-[180/60] active:bg-[lightgreen]"
           />
           <input
             type="button"

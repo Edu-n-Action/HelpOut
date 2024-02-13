@@ -19,7 +19,7 @@ export default function FormData(submit) {
     >
       <div className="w-full aspect-[379/272] flex flex-col justify-between">
         <div className="aspect-[379/127] w-full">
-          <div className="aspect-[379/27] text-[4.6vw] md:text-[1.5vw]">
+          <div className="aspect-[379/27] text-[4.6vw] md:text-[1.2vw]">
             Add header
           </div>
           <div className="aspect-[379/100] w-full bg-greydef rounded-[3%/10%]">
@@ -31,7 +31,7 @@ export default function FormData(submit) {
           </div>
         </div>
         <div className="aspect-[379/127] w-full">
-          <div className="aspect-[379/27] text-[4.6vw] md:text-[1.5vw]">
+          <div className="aspect-[379/27] text-[4.6vw] md:text-[1.2vw]">
             Add Profile
           </div>
           <div className="aspect-[100/100] w-[26.3%] bg-greydef rounded-[10%/10%]">
