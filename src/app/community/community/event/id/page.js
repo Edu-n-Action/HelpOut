@@ -1,9 +1,8 @@
 import FormData from "./formData";
 import Image from "next/image";
 
-const Profile = () => {
+const EventHome = () => {
   const submit = () => {};
-  const first = 1;
   return (
     <div className="flex flex-col justify-center font-poppins font-normal items-center min-h-[100vh] bg-back">
       <div className="w-[90%] md:w-[35%] flex flex-col aspect-[430/932] justify-between">
@@ -20,4 +19,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default EventHome;

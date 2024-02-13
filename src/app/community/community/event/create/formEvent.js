@@ -1,33 +1,35 @@
 "use client";
 
-import InputImage from "@/components/common/inputImage/inputImage";
 import Image from "next/image";
+import dateData from "@/const/cdate";
+import InputDate from "@/components/common/inputDate/inputDate";
+import InputImage from "@/components/common/inputImage/inputImage";
 
-export default function FormData(submit) {
+export default function FormEvent(submit) {
   const data = [
-    { title: "Name", type: "text", placeholder: "Masukkan nama" },
+    { title: "Judul", type: "text", placeholder: "Masukkan judul kegiatan" },
     {
-      title: "Location",
+      title: "Keterangan",
       type: "text",
-      placeholder: "Masukkan lokasi",
+      placeholder: "Masukkan penjelasan kegiatan",
     },
   ];
   const tes = () => {};
   return (
     <form
       onSubmit={tes}
-      className="flex flex-col aspect-[379/759] w-[100%] justify-around"
+      className="flex flex-col aspect-[379/788] w-[100%] justify-around"
     >
       <div className="w-full aspect-[379/272] flex flex-col justify-between">
         <div className="aspect-[379/127] w-full">
-          <div className="aspect-[379/27] text-[4.6vw] md:text-[1.2vw]">
+          <div className="aspect-[379/27] text-[4.8vw] md:text-[1.2vw]">
             Add header
           </div>
           <InputImage className="aspect-[379/100] w-full rounded-[3%/10%]" />
         </div>
         <div className="aspect-[379/127] w-full">
-          <div className="aspect-[379/27] text-[4.6vw] md:text-[1.2vw]">
-            Add Profile
+          <div className="aspect-[379/27] text-[4.8vw] md:text-[1.2vw]">
+            Add main tumbnail
           </div>
           <InputImage className="aspect-[100/100] w-[26.3%] rounded-[10%/10%]" />
         </div>
@@ -55,22 +57,25 @@ export default function FormData(submit) {
           </div>
         );
       })}
-      <div className="relative w-full aspect-[379/179]">
-        <div className="w-full aspect-[379/21] text-[4.8vw] md:text-[1.8vw] font-semibold">
-          Bio
+      <div className="relative w-full aspect-[379/210] md:aspect-[379/195] flex flex-col justify-between">
+        <div className="w-full flex flex-col justify-around aspect-[379/90]">
+          <div className="w-full aspect-[379/21] text-[4.8vw] md:text-[1.8vw]">
+            Date Started
+          </div>
+          <InputDate />
         </div>
-        <textarea
-          className="w-full aspect-[379/155] rounded-[2%/5%] pl-[2%] pr-[10%] pt-[1%] flex justify-center"
-          name="myBio"
-          rows="4"
-          cols="50"
-          placeholder="Masukkan bio"
-        ></textarea>
+
+        <div className="w-full flex flex-col justify-around aspect-[379/90]">
+          <div className="w-full aspect-[379/21] text-[4.8vw] md:text-[1.8vw]">
+            Date Ended
+          </div>
+          <InputDate />
+        </div>
       </div>
       <div className="aspect-[379/60] w-[100%] flex justify-between text-[4.8vw] md:text-[2vw]">
         <input
           type="submit"
-          value="Submit"
+          value="Next"
           className="bg-greenYellow rounded-[4%/10%] w-[48%] aspect-[180/60] active:bg-[lightgreen]"
         />
         <input
