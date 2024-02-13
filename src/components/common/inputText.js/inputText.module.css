@@ -1,0 +1,7 @@
+.inputContainer {
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.5);
+    border-color: #2F3A47;
+    border-width: 1px;
+    border-radius: 8px;
+    padding: 8px 11px;  
+}
