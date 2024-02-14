@@ -1,5 +1,7 @@
+import ConfirmAndShare from "@/components/common/confirm/confirmAndShare";
+
 const DonationHome = () => {
-  return <div>Donation</div>;
+  return <ConfirmAndShare />;
 };
 
 export default DonationHome;
