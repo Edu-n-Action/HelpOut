@@ -25,12 +25,12 @@ export default function Home() {
         <div className="max-w-[283px] w-full flex flex-col mt-[150px]">
           <Link
             className="bg-[#CEFD4A] py-3 max-w-[283px] w-full z-[10] text-center text-2xl"
-            href={"/"}
+            href={"/personal/"}
           >
             For Personal
           </Link>
           <Link
-            href={"/"}
+            href={"/community/"}
             className="bg-[#CEFD4A] py-3 max-w-[283px] w-full z-[10] mt-4 text-center text-2xl"
           >
             For Community

@@ -5,7 +5,7 @@ const MemberPresence = ({
     attended: [
       {
         name: "Ken Bima Satria Gandasasmita",
-        role: "Hipster",
+        // role: "Hipster",
       },
       {
         name: "Polikarpus Arya Pradhanika",
@@ -36,12 +36,14 @@ const MemberPresence = ({
                 >
                   <div className="aspect-[390/73] w-[99%] px-[4%] shadow-md bg-back rounded-[3%/15%] flex flex-row justify-between items-center md:text-[1.06vw] text-[3.2vw]">
                     <div className="break-words">{item.name}</div>
-                    <div className="font-semibold min-w-[25%]">
-                      <div>{item.role}</div>
-                      <button className="md:text-[0.86vw] text-[2.6vw] font-l text-[#AEE90A]">
-                        See details
-                      </button>
-                    </div>
+                    {item.role && (
+                      <div className="font-semibold min-w-[25%]">
+                        <div>{item.role}</div>
+                        <button className="md:text-[0.86vw] text-[2.6vw] font-l text-[#AEE90A]">
+                          See details
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               );
@@ -65,12 +67,14 @@ const MemberPresence = ({
                 >
                   <div className="aspect-[390/73] w-[99%] px-[4%] shadow-md bg-back rounded-[3%/15%] flex flex-row justify-between items-center md:text-[1.06vw] text-[3.2vw]">
                     <div className="break-words">{item.name}</div>
-                    <div className="font-semibold min-w-[25%]">
-                      <div>{item.role}</div>
-                      <button className="md:text-[0.86vw] text-[2.6vw] font-l text-[#AEE90A]">
-                        See details
-                      </button>
-                    </div>
+                    {item.role && (
+                      <div className="font-semibold min-w-[25%]">
+                        <div>{item.role}</div>
+                        <button className="md:text-[0.86vw] text-[2.6vw] font-l text-[#AEE90A]">
+                          See details
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               );
