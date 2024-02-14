@@ -6,10 +6,14 @@ export default function Home() {
   return (
     <main className="flex justify-center">
       <div className="aspect-[430/932] h-screen max-md:w-full flex flex-col items-center relative pt-[50px] ">
-        <img
-          src="/ornaments/waveMobile.jpg"
-          className="absolute bottom-0 z-[0]"
-        />
+        <div className="absolute aspect-[430/518] w-full bottom-0">
+          <Image
+            src="/ornaments/waveMobile.jpg"
+            alt="wave"
+            fill
+            className="absolute bottom-0 z-[0]"
+          />
+        </div>
 
         <div className="bg-[#2F3A47] rounded-xl p-3 flex justify-center max-w-fit z-[10] ">
           <p className="text-5xl font-bold">
