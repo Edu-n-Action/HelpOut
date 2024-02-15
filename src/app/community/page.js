@@ -1,11 +1,13 @@
-import Homepage_C from "@/components/homepage/homepage_community";
+import CommunityHomepage from "@/components/homepage/communityHomepage";
+import PersonalHomepage from "@/components/homepage/communityHomepage";
 
-const Community = () => {
+const Home = () => {
   return (
-    <div>
-      <div className="bg-[red] w-full">asdasd</div>
+    <div className="w-full h-fit">
+      {" "}
+      <CommunityHomepage />
     </div>
   );
 };
 
-export default Community;
+export default Home;
