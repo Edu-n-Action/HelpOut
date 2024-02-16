@@ -1,5 +1,8 @@
-import React from 'react'
+'use client'
+
+import React, {useState} from 'react'
 import SignupForm from '@/components/auth/formSignUp/SignupForm'
+
 
 function page() {
   return (
