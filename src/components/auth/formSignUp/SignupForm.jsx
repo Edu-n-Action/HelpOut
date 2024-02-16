@@ -39,12 +39,12 @@ function SignupForm() {
         .then(async (userCredential) => {
           // Signed up 
           const user = userCredential.user;
-          const personalCollection = collection(db, 'User')
+          const Collection = collection(db, 'User')
           const documentData = {
             email : user.email,
             userID : user.uid
           }
-          const newData = await addDoc(personalCollection, documentData)
+          const newData = await addDoc(Collection, documentData)
           console.log(newData)
           // ...
         })
