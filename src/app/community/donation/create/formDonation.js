@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import dateData from "@/const/cdate";
-import InputDate from "@/components/common/inputDate/inputDate";
-import InputImage from "@/components/common/inputImage/inputImage";
+import InputDate from "@/components/common/input/inputDate";
+import InputImage from "@/components/common/input/inputImage";
 
 export default function FormDonation(submit) {
   const data = [

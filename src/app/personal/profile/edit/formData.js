@@ -1,6 +1,6 @@
 "use client";
 
-import InputImage from "@/components/common/inputImage/inputImage";
+import InputImage from "@/components/common/input/inputImage";
 import Image from "next/image";
 
 export default function FormData(submit) {
