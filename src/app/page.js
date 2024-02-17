@@ -1,10 +1,11 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import Link from "next/link";
+import ConfirmPopUp from "@/components/common/confirm/confirmPopUp";
 
 export default function Home() {
   return (
-    <main className="flex justify-center">
+    <main className="relative flex justify-center">
       <div className="aspect-[430/932] h-screen max-md:w-full flex flex-col items-center relative pt-[50px] ">
         <div className="absolute aspect-[430/518] w-full bottom-0">
           <Image
