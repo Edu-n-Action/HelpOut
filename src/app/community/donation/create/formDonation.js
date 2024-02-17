@@ -9,7 +9,7 @@ import InputImage from "@/components/common/input/inputImage";
 
 import CreateDonationOne from "@/components/createDonation/createDonationOne";
 import CreateDonationTwo from "@/components/createDonation/createDonationTwo";
-
+import DonationisLive from "@/components/createDonation/donationisLive";
 export default function FormDonation(submit) {
   const [dataDonasi, SetDataDonasi] = useState({
     header: undefined,
@@ -47,6 +47,7 @@ export default function FormDonation(submit) {
             index == 0 ?
               <CreateDonationOne Data={dataDonasi} SetData={SetDataDonasi} SetIndex={SetIndex} />
               :
+
               <CreateDonationTwo Data={dataDonasi} SetData={SetDataDonasi} SetIndex={SetIndex} />
           }
 
