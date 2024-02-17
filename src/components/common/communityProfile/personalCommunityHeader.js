@@ -1,6 +1,9 @@
-import Image from "next/image";
+"use client";
 
-const CommunityHeader = ({
+import Image from "next/image";
+import { useState } from "react";
+
+const PersonalCommunityHeader = ({
   data = {
     header: "",
     profilePicture: "",
@@ -10,6 +13,7 @@ const CommunityHeader = ({
     bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam rhoncus in arcu eu lacinia. Nulla dapibus arcu ac eros molestie dapibus. Fusce lobortis purus sed purus dignissim, eu consectetur ligula scelerisque. Maecenas euismod velit id cursus gravida. Mauris at velit eget augue posuere eleifend.",
   },
 }) => {
+  const [joined, setJoinned] = useState(0);
   return (
     <div className="relative w-full flex flex-col items-center bg-back">
       <div className="aspect-[430/160] w-full bg-greydef md:rounded-[2%/7%]">
@@ -38,9 +42,22 @@ const CommunityHeader = ({
           <b>{data.membersCount}</b>&nbsp;
           {data.membersCount > 1 ? <div>Members</div> : <div>Member</div>}
         </div>
+        <div className="w-full h-fit flex flex-row justify-center md:text-[1.2vw] text-[3.3vw] mb-[4%]">
+          <button
+            onClick={() => setJoinned(1 - joined)}
+            className="aspect-[155/30] text-greyprime w-[35%] px-[4%] flex flex-row justify-center items-center gap-[3%] rounded-[4%/13%] bg-greenYellow active:bg-[lightgreen]"
+          >
+            {joined ? (
+              <div className="relative aspect-[1/1] w-[15%]">
+                <Image src={"/icon/add-basic.svg"} alt={""} fill />
+              </div>
+            ) : null}
+            {joined ? <div>Apply</div> : <div>Leave</div>}
+          </button>
+        </div>
       </div>
     </div>
   );
 };
 
-export default CommunityHeader;
+export default PersonalCommunityHeader;
