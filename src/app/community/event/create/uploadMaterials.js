@@ -70,7 +70,7 @@ const UploadMaterials = ({ SetStep = () => {}, step }) => {
               }}
               className="bg-greenYellow rounded-[4%/10%] w-[48%] aspect-[180/60] active:bg-[lightgreen]"
             >
-              Next
+              Upload
             </button>
             <button
               onClick={() => {}}

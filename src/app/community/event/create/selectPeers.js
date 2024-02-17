@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const LibBlock = ({ title }) => {
+const RoleBlock = ({ title }) => {
   const [choosen, setChoosen] = useState(0);
   const bg = ["#EFEFEF", "#CEFD4A"];
   const border = ["#2F3A47", "#2F3A47"];
@@ -27,32 +27,38 @@ const LibBlock = ({ title }) => {
   );
 };
 
-const SelectPeers = () => {
-  let lib = [
+const SelectPeers = ({ setStep, step }) => {
+  const [peers, setPeers] = useState(0);
+  let people = [
     {
-      title: "Panduan buku A",
+      name: "Salman Faiz",
+      join: true,
+      role: "",
+      jobdesk: "",
     },
     {
-      title: "Panduan buku A",
+      name: "Ken Satria",
+      join: true,
+      role: "",
+      jobdesk: "",
     },
     {
-      title: "Panduan buku A",
+      name: "Polikarpus Arya",
+      join: true,
+      role: "",
+      jobdesk: "",
     },
     {
-      title: "Panduan buku A",
-    },
-    {
-      title: "Panduan buku A",
-    },
-
-    {
-      title: "Panduan buku A",
+      name: "Wafi Afdi",
+      join: true,
+      role: "",
+      jobdesk: "",
     },
   ];
   return (
     <div className="w-[100%] flex flex-col items-center justify-start">
       <h1 className="aspect-[430/50] w-[90%] text-[7.5vw] md:text-[3vw] text-product text-left text-greyprime">
-        Upload Materials
+        Select Peers
       </h1>
 
       <div className="flex flex-col justify-start bg-back h-fit w-[90%]">
@@ -60,13 +66,13 @@ const SelectPeers = () => {
           <div className="h-fit w-full items-center text-[5.4vw] md:text-[1.6vw]">
             <div>Choose from library</div>
           </div>
-          {lib.map((item, index) => {
-            return <LibBlock key={index} title={item.title} />;
+          {people.map((item, index) => {
+            return <RoleBlock key={index} setPeers={setPeers} peers={item} />;
           })}
           <div className="aspect-[379/60] w-[100%] flex justify-between text-[4.8vw] md:text-[2vw]">
             <button
               onClick={() => {
-                SetStep(step + 1);
+                setStep(step + 1);
               }}
               className="bg-greenYellow rounded-[4%/10%] w-[48%] aspect-[180/60] active:bg-[lightgreen]"
             >
