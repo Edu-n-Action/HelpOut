@@ -1,16 +1,21 @@
 "use client";
 import React, {useState} from "react";
+import { useRouter } from "next/navigation";
+
 import InputTextTransparent from "@/components/common/inputText/inputTextTransparent";
 
 
-import { getAuth, signOut, signInWithEmailAndPassword } from "firebase/auth";
+
+import { signInWithEmailAndPassword, browserSessionPersistence } from "firebase/auth";
 import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore'
-import {db} from '@/app/firebase'
+import {db, auth} from '@/app/firebase';
 
 import { PersonalAuth } from "@/Context/PersonalAuthContext";
+import { GlobalAuth } from "@/Context/GlobalContext";
 
 function LoginForm({}) {
-  const { userData, emailSignIn, emailLogOut} = PersonalAuth()
+  const router = useRouter();
+  const {emailLogOut, emailSignInPersonal, authFirebase } = GlobalAuth();
 
   const [signinData, SetSignin] = useState({
     email : undefined,
@@ -33,7 +38,8 @@ function LoginForm({}) {
   const submitLogin = async (event) => {
     event.preventDefault();
     try {
-      await emailSignIn(signinData.email, signinData.password)
+      await emailSignInPersonal(signinData.email, signinData.password)
+      router.push("http://localhost:3000/personal/home")
     } catch (error) {
       console.log(error.message)
     }
