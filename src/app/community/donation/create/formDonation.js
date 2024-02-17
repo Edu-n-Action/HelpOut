@@ -1,92 +1,59 @@
 "use client";
 
+import React, { useState } from "react";
+
 import Image from "next/image";
 import dateData from "@/const/cdate";
 import InputDate from "@/components/common/input/inputDate";
 import InputImage from "@/components/common/input/inputImage";
 
+import CreateDonationOne from "@/components/createDonation/createDonationOne";
+import CreateDonationTwo from "@/components/createDonation/createDonationTwo";
+
 export default function FormDonation(submit) {
+  const [dataDonasi, SetDataDonasi] = useState({
+    header: undefined,
+    title: "",
+    cerita: "",
+    dateStart: new Date(),
+    dateEnd: new Date(),
+    target: "",
+    qrCode: undefined,
+    gambar: undefined,
+    bank: "",
+    pesanTerimaKasih: ""
+  })
+
+  const [index, SetIndex] = useState(0)
   const data = [
     { title: "Title", type: "text", placeholder: "Masukkan judul kegiatan" },
   ];
-  const tes = () => {};
+  const tes = (e) => {
+    e.preventDefault();
+  };
   return (
-    <form
-      onSubmit={tes}
-      className="flex flex-col aspect-[379/788] w-[100%] justify-around"
-    >
-      <div className="w-full aspect-[379/127] flex flex-col justify-between">
-        <div className="aspect-[379/127] w-full">
-          <div className="aspect-[379/27] text-[4.8vw] md:text-[1.2vw]">
-            Add header
-          </div>
-          <InputImage className="aspect-[379/100] w-full rounded-[3%/10%]" />
-        </div>
-      </div>
-      {data.map((item, index) => {
-        return (
-          <div key={index} className="w-full aspect-[379/50]">
-            <div className="w-full aspect-[379/21] text-[4.8vw] md:text-[1.8vw] font-semibold">
-              {item.title}
-            </div>
-            <div className="relative w-full aspect-[379/29]">
-              {item.type != "date" ? (
-                <div className="aspect-[1/1] w-[5%] absolute top-0 bottom-0 my-auto right-[2%]">
-                  <Image src={"/icon/pen.svg"} alt={"pen"} fill />
-                </div>
-              ) : (
-                <div></div>
-              )}
-              <input
-                className="w-full aspect-[379/29] rounded-[2%/25%] pl-[2%] pr-[3%]"
-                placeholder={item.placeholder}
-                type={item.type}
-              />
-            </div>
-          </div>
-        );
-      })}
-      <div className="relative w-full aspect-[379/179]">
-        <div className="w-full aspect-[379/21] text-[4.8vw] md:text-[1.8vw] font-semibold">
-          Cerita Donasi Kita
-        </div>
-        <textarea
-          className="w-full aspect-[379/155] rounded-[2%/5%] pl-[2%] pr-[10%] pt-[1%] flex justify-center"
-          name="myBio"
-          rows="4"
-          cols="50"
-          placeholder="Masukkan cerita"
-        ></textarea>
-      </div>
-      <div className="relative w-full aspect-[379/210] md:aspect-[379/195] flex flex-col justify-between">
-        <div className="w-full flex flex-col justify-around aspect-[379/90]">
-          <div className="w-full aspect-[379/21] text-[4.8vw] md:text-[1.8vw]">
-            Date Started
-          </div>
+    <>
+      <h1 className="aspect-[430/50] w-[90%] text-[7.5vw] md:text-[3vw] text-product text-left">
+        {index == 0 ? "Make a Donation" :
+          index == 1 ? "Add Donation Center" : ""
+        }
+      </h1>
+      <div className="aspect-[379/688] w-[88.13%]">
+        <form
+          onSubmit={tes}
+          className="flex flex-col aspect-[379/788] w-[100%] gap-[3%]"
+        >
+          {
+            index == 0 ?
+              <CreateDonationOne Data={dataDonasi} SetData={SetDataDonasi} SetIndex={SetIndex} />
+              :
+              <CreateDonationTwo Data={dataDonasi} SetData={SetDataDonasi} SetIndex={SetIndex} />
+          }
 
-          <InputDate />
-        </div>
+        </form>
+      </div>
+    </>
 
-        <div className="w-full flex flex-col justify-around aspect-[379/90]">
-          <div className="w-full aspect-[379/21] text-[4.8vw] md:text-[1.8vw]">
-            Date Ended
-          </div>
-          <InputDate />
-        </div>
-      </div>
-      <div className="aspect-[379/60] w-[100%] flex justify-between text-[4.8vw] md:text-[2vw]">
-        <input
-          type="submit"
-          value="Next"
-          className="bg-greenYellow rounded-[4%/10%] w-[48%] aspect-[180/60] active:bg-[lightgreen]"
-        />
-        <input
-          type="button"
-          onClick={() => {}}
-          value="Discard"
-          className="bg-greydef rounded-[4%/10%] w-[48%] aspect-[180/60] active:bg-[darkgrey]"
-        />
-      </div>
-    </form>
+
   );
 }

@@ -3,7 +3,10 @@
 import InputImage from "@/components/common/input/inputImage";
 import Image from "next/image";
 
+import { PersonalAuth } from "@/Context/PersonalAuthContext";
+
 export default function FormData(submit) {
+  const { updateProfileData } = PersonalAuth()
   const data = [
     { title: "Name", type: "text", placeholder: "Masukkan nama" },
     {
@@ -17,7 +20,10 @@ export default function FormData(submit) {
       placeholder: "Masukkan lokasi",
     },
   ];
-  const tes = () => {};
+  const tes = (e) => {
+    e.preventDefault()
+    //updateProfileData("Wafi Afdi Alfaruqhi", "Saya Wafi", new Date("12-11-2004"), "Yogyakarta")
+  };
   return (
     <form
       onSubmit={tes}
