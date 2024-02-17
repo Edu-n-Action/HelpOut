@@ -1,5 +1,7 @@
-const DonationHome = () => {
-  return <div>Donation</div>;
+const { default: Notif } = require("@/components/notifications/Notification");
+
+const Notification = () => {
+  return <Notif />;
 };
 
-export default DonationHome;
+export default Notification;

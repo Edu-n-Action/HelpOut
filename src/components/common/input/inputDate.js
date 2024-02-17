@@ -13,7 +13,7 @@ function InputDate({ SetValue = () => {}, value = [0, 0, 0] }) {
           className="aspect-[120/35] w-[100%] text-[4.2vw] md:text-[1.2vw] bg-greydef rounded-[4%/10%]"
           onChange={(e) => SetValue([e.target.value, value[1], value[2]])}
         >
-          <option selected>hari</option>
+          <option defaultValue={"hari"}>hari</option>
           {dateData.day.map((item, index) => {
             return (
               <option key={index} value={item}>
@@ -32,7 +32,7 @@ function InputDate({ SetValue = () => {}, value = [0, 0, 0] }) {
           onChange={(e) => SetValue([value[0], e.target.value, value[2]])}
           value={value}
         >
-          <option selected>bulan</option>
+          <option defaultValue={"bulan"}>bulan</option>
           {dateData.month.map((item, index) => {
             return (
               <option key={index} value={item}>
@@ -50,7 +50,7 @@ function InputDate({ SetValue = () => {}, value = [0, 0, 0] }) {
           className="aspect-[120/35] w-[100%] text-[4.2vw] md:text-[1.2vw] bg-greydef rounded-[4%/10%]"
           onChange={(e) => SetValue([value[0], value[1], e.target.value])}
         >
-          <option selected>tahun</option>
+          <option defaultValue={"tahun"}>tahun</option>
           {dateData.year.map((item, index) => {
             return (
               <option key={index} value={item}>

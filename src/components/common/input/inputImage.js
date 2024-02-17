@@ -22,7 +22,7 @@ function InputImage({
         type="file"
         className="w-full h-full opacity-0"
         accept="image/jpeg, image/png image/jpg"
-        onChange={(e) => SetValue(e.target.value)}
+        onChange={(e) => SetValue(e.target.files)}
         value={value}
       />
     </div>
