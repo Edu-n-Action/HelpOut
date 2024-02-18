@@ -5,21 +5,18 @@ import ConfirmPopUp from "@/components/common/confirm/confirmPopUp";
 
 export default function Home() {
   return (
-    <main className="relative flex justify-center">
+    <main className="relative w-full flex justify-center">
+      <div className="hidden md:inline absolute md:aspect-[1440/465] w-[100%] bottom-0 z-0">
+        <Image srcset={"/ornaments/wavy-low-deks.svg"} alt={"wave"} fill />
+      </div>
+      <div className="inline md:hidden absolute aspect-[430/550] w-full bottom-0 z-0">
+        <Image srcset={"/ornaments/wave-mobile.svg"} alt={"wave"} fill />
+      </div>
       <div className="aspect-[430/932] h-screen max-md:w-full flex flex-col items-center relative pt-[50px] ">
-        <div className="absolute aspect-[430/518] w-full bottom-0">
-          <Image
-            src="/ornaments/waveMobile.jpg"
-            alt="wave"
-            fill
-            className="absolute bottom-0 z-[0]"
-          />
-        </div>
-
         <div className="bg-[#2F3A47] rounded-xl p-3 flex justify-center max-w-fit z-[10] ">
           <p className="text-5xl font-bold">
-            <span className="text-[#CEFD4A]">Edu</span>
-            <span className="text-white">nity</span>
+            <span className="text-[#CEFD4A]">Help</span>
+            <span className="text-white">Out</span>
           </p>
         </div>
 
