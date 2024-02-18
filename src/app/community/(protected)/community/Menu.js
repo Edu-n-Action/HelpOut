@@ -12,7 +12,7 @@ const Menu = () => {
   // nilai dari 1 sampai 3
   const [menu, setMenu] = useState(0);
   return (
-    <div className="w-full flex flex-col items-center bg-back">
+    <div className="w-full flex flex-col items-center bg-back pb-[30%] md:pb-[20%]">
       <MenuButton
         title={["Event", "Member", "Library"]}
         setValue={setMenu}

@@ -8,6 +8,9 @@ const Materials = ({
     "Buku Panduan Mengajar B",
     "Buku Panduan Mengajar C",
     "Buku Panduan Mengajar D",
+    "Buku Panduan Mengajar B",
+    "Buku Panduan Mengajar C",
+    "Buku Panduan Mengajar D",
   ],
   add = true,
 }) => {

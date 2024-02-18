@@ -4,7 +4,7 @@ import { FirebaseContextProvider } from "@/Context/GlobalContext";
 import Head from "next/head";
 export const metadata = {
   title: "HelpOut",
-  description: "Education opportunity for all",
+  description: "Help all volunteer all over Indonesia",
 };
 
 export default function RootLayout({ children }) {

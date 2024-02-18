@@ -1,6 +1,7 @@
 import Image from "next/image";
 import ProgressBar from "../common/progressbar/progressBar";
 import EventTask from "../common/eventProfile/eventTask";
+import Navbar from "./navbar/Navbar";
 
 const PersonalHomepage = ({
   eventList = [
@@ -51,7 +52,7 @@ const PersonalHomepage = ({
   },
 }) => {
   return (
-    <div className="aspect-[430/932] min-h-fit h-screen w-full md:aspect-auto md:flex md:justify-center bg-back overflow-y-scroll ">
+    <div className="aspect-[430/932] min-h-fit h-screen w-full md:aspect-auto md:flex md:justify-center bg-back overflow-y-scroll">
       <div className="hidden md:inline absolute md:aspect-[1440/465] w-[100%] bottom-0 z-0">
         <Image srcset={"/ornaments/wavy-low-deks.svg"} alt={"wave"} fill />
       </div>
@@ -109,6 +110,9 @@ const PersonalHomepage = ({
             </div>
           </div>
         )}
+        <div className="relative z-2 aspect-[387/40] md:aspect-[387/85] w-full">
+          <div className="aspect-[387/40] md:aspect-[387/85] w-full"></div>
+        </div>
       </div>
     </div>
   );

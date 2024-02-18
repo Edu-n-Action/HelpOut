@@ -1,3 +1,4 @@
+import Navbar from "@/components/homepage/navbar/Navbar";
 import PersonalHomepage from "@/components/homepage/personalHomepage";
 
 const Home = () => {

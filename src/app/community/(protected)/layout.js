@@ -1,5 +1,5 @@
 import Navbar from "@/components/homepage/navbar/Navbar";
-import { AuthContextProvider } from "@/Context/CommunityAuthContext"
+import { AuthContextProvider } from "@/Context/CommunityAuthContext";
 export const metadata = {
   title: "Edunity",
   description: "Education opportunity for all",
@@ -8,8 +8,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <AuthContextProvider>
-      <Navbar community={true}/>
-        {children}
+      <Navbar community={true} />
+      <div className="w-full h-full">{children}</div>
     </AuthContextProvider>
   );
 }
