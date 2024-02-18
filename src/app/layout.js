@@ -3,7 +3,7 @@ import Navbar from "@/components/homepage/navbar/Navbar";
 import { FirebaseContextProvider } from "@/Context/GlobalContext";
 import Head from "next/head";
 export const metadata = {
-  title: "Edunity",
+  title: "HelpOut",
   description: "Education opportunity for all",
 };
 
