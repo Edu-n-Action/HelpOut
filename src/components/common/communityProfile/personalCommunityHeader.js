@@ -52,7 +52,14 @@ const PersonalCommunityHeader = ({
                 <Image src={"/icon/add-basic.svg"} alt={""} fill />
               </div>
             ) : null}
-            {joined ? <div>Apply</div> : <div>Leave</div>}
+            {joined == 0 ?
+              <div>Apply</div>
+              :
+              joined == 1 ?
+                <div>Leave</div>
+                :
+                <div>Cancel Apply</div>
+            }
           </button>
         </div>
       </div>
