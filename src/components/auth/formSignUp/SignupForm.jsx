@@ -1,61 +1,50 @@
 "use client";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import InputTextTransparent from "@/components/common/inputText/inputTextTransparent";
 
 import { collection, addDoc } from 'firebase/firestore';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
-import {db} from '@/app/firebase'
-function SignupForm() {
+import { GlobalAuth } from "@/Context/GlobalContext";
+
+import { db } from '@/app/firebase'
+function SignupForm({ community = true }) {
+  const { emailSignUpCommunity } = GlobalAuth()
   const [signupData, SetSignup] = useState({
-    email : undefined,
-    password : undefined,
-    confirmPassword : undefined
+    email: undefined,
+    password: undefined,
+    confirmPassword: undefined
   })
-  
+
   const setPassword = (value) => {
     SetSignup(old => {
-      return {...old, "password" : value}
+      return { ...old, "password": value }
     })
   }
 
   const setEmail = (value) => {
     SetSignup(old => {
-      return {...old, "email" : value}
+      return { ...old, "email": value }
     })
   }
 
   const setConfirmPassword = (value) => {
     SetSignup(old => {
-      return {...old, "confirmPassword" : value}
+      return { ...old, "confirmPassword": value }
     })
   }
 
   const submitForm = async (e) => {
     e.preventDefault()
-    if(signupData.email != "" && signupData.password != "") {
-      const auth = getAuth();
-      await createUserWithEmailAndPassword(auth, signupData.email, signupData.password)
-        .then(async (userCredential) => {
-          // Signed up 
-          const user = userCredential.user;
-          const Collection = collection(db, 'User')
-          const documentData = {
-            email : user.email,
-            userID : user.uid
-          }
-          const newData = await addDoc(Collection, documentData)
-          console.log(newData)
-          // ...
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorMessage)
-          // ..
-        });
+    try {
+      if (community) {
+        emailSignUpCommunity(signupData.email, signupData.password)
+      }
+    } catch (error) {
+      console.log(error.message)
     }
-    
+
+
   }
   return (
     <form className="max-w-[600px] w-full flex flex-col items-center"
@@ -67,7 +56,7 @@ function SignupForm() {
       <InputTextTransparent
         className={"max-w-[550px]"}
         placeholder="Email"
-        email={true}
+        type="email"
         value={signupData.email}
         SetValue={setEmail}
       />
@@ -76,12 +65,14 @@ function SignupForm() {
         placeholder="Password"
         value={signupData.password}
         SetValue={setPassword}
+        type="password"
       />
       <InputTextTransparent
         className={"mt-5 max-w-[550px]"}
         placeholder="Confirm Password"
         value={signupData.confirmPassword}
         SetValue={setConfirmPassword}
+        type="password"
       />
       <button
         className="bg-[#CEFD4A] py-3 w-full z-[10] text-center text-xl mt-9"

@@ -7,6 +7,7 @@ function InputImage({
   SetValue = () => { },
   value = "",
   add = false,
+  fill = true
 }) {
   return (
     <div
@@ -20,7 +21,7 @@ function InputImage({
 
       {
         value && (
-          <Image src={URL.createObjectURL(value)} fill />
+          <Image src={URL.createObjectURL(value)} fill={true} style={{ objectFit: `${fill ? "fill" : "cover"}` }} />
         )
       }
 

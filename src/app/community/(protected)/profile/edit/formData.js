@@ -1,18 +1,46 @@
 "use client";
-
+import React, { useState } from "react";
 import InputImage from "@/components/common/input/inputImage";
 import Image from "next/image";
 
+import { CommunityAuth } from "@/Context/CommunityAuthContext";
+
 export default function FormData(submit) {
+  const { updateProfileData } = CommunityAuth();
+
+  const [profil, SetProfil] = useState({
+    header: undefined,
+    gambar: undefined,
+    nama: undefined,
+    lokasi: undefined,
+    bio: undefined
+  })
+  console.log(profil)
+  const changeData = (value, key) => {
+    SetProfil((old) => {
+      return { ...old, [key]: value }
+    })
+  }
   const data = [
-    { title: "Name", type: "text", placeholder: "Masukkan nama" },
+    { title: "Name", type: "text", placeholder: "Masukkan nama", key: "nama" },
     {
       title: "Location",
       type: "text",
       placeholder: "Masukkan lokasi",
+      key: "lokasi"
     },
   ];
-  const tes = () => {};
+  const tes = async (e) => {
+    e.preventDefault();
+    try {
+      await updateProfileData(profil.nama, profil.bio, profil.lokasi, profil.header, profil.gambar)
+      console.log("SUCCESS")
+    } catch (error) {
+      console.log(error)
+      console.log("Failed")
+    }
+
+  };
   return (
     <form
       onSubmit={tes}
@@ -23,13 +51,13 @@ export default function FormData(submit) {
           <div className="aspect-[379/27] text-[4.6vw] md:text-[1.2vw]">
             Add header
           </div>
-          <InputImage className="aspect-[379/100] w-full rounded-[3%/10%]" />
+          <InputImage fill={false} SetValue={(value) => changeData(value, "header")} value={profil.header} className="aspect-[379/100] w-full rounded-[3%/10%]" />
         </div>
         <div className="aspect-[379/127] w-full">
           <div className="aspect-[379/27] text-[4.6vw] md:text-[1.2vw]">
             Add Profile
           </div>
-          <InputImage className="aspect-[100/100] w-[26.3%] rounded-[10%/10%]" />
+          <InputImage SetValue={(value) => changeData(value, "gambar")} value={profil.gambar} className="aspect-[100/100] w-[26.3%] rounded-[10%/10%]" />
         </div>
       </div>
       {data.map((item, index) => {
@@ -50,6 +78,8 @@ export default function FormData(submit) {
                 className="w-full aspect-[379/29] rounded-[2%/25%] pl-[2%] pr-[3%]"
                 placeholder={item.placeholder}
                 type={item.type}
+                value={profil[item.key]}
+                onChange={(e) => changeData(e.target.value, item.key)}
               />
             </div>
           </div>
@@ -65,6 +95,8 @@ export default function FormData(submit) {
           rows="4"
           cols="50"
           placeholder="Masukkan bio"
+          value={profil.bio}
+          onChange={(e) => changeData(e.target.value, "bio")}
         ></textarea>
       </div>
       <div className="aspect-[379/60] w-[100%] flex justify-between text-[4.8vw] md:text-[2vw]">
@@ -75,7 +107,7 @@ export default function FormData(submit) {
         />
         <input
           type="button"
-          onClick={() => {}}
+          onClick={() => { }}
           value="Discard"
           className="bg-greydef rounded-[4%/10%] w-[48%] aspect-[180/60] active:bg-[darkgrey]"
         />

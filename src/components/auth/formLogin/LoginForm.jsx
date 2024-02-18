@@ -1,5 +1,5 @@
 "use client";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import InputTextTransparent from "@/components/common/inputText/inputTextTransparent";
@@ -8,29 +8,29 @@ import InputTextTransparent from "@/components/common/inputText/inputTextTranspa
 
 import { signInWithEmailAndPassword, browserSessionPersistence } from "firebase/auth";
 import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore'
-import {db, auth} from '@/app/firebase';
+import { db, auth } from '@/app/firebase';
 
 import { PersonalAuth } from "@/Context/PersonalAuthContext";
 import { GlobalAuth } from "@/Context/GlobalContext";
 
-function LoginForm({}) {
+function LoginForm({ community = true }) {
   const router = useRouter();
-  const {emailLogOut, emailSignInPersonal, authFirebase } = GlobalAuth();
+  const { emailLogOut, emailSignInPersonal, authFirebase, emailSignInCommunity } = GlobalAuth();
 
   const [signinData, SetSignin] = useState({
-    email : undefined,
-    password : undefined,
+    email: undefined,
+    password: undefined,
   })
-  
+
   const setPassword = (value) => {
     SetSignin(old => {
-      return {...old, "password" : value}
+      return { ...old, "password": value }
     })
   }
 
   const setEmail = (value) => {
     SetSignin(old => {
-      return {...old, "email" : value}
+      return { ...old, "email": value }
     })
   }
 
@@ -38,8 +38,9 @@ function LoginForm({}) {
   const submitLogin = async (event) => {
     event.preventDefault();
     try {
-      await emailSignInPersonal(signinData.email, signinData.password)
-      router.push("http://localhost:3000/personal/home")
+      if (community) {
+        await emailSignInCommunity(signinData.email, signinData.password)
+      }
     } catch (error) {
       console.log(error.message)
     }
@@ -52,7 +53,7 @@ function LoginForm({}) {
       <InputTextTransparent
         className={"max-w-[550px]"}
         placeholder="Email"
-        email={true}
+        type="email"
         value={signinData.email}
         SetValue={setEmail}
       />
@@ -61,6 +62,7 @@ function LoginForm({}) {
         placeholder="Password"
         value={signinData.password}
         SetValue={setPassword}
+        type="password"
       />
       <button
         className="bg-[#CEFD4A] py-3 w-full z-[10] text-center text-xl mt-9"

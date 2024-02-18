@@ -1,18 +1,18 @@
 "use client"
 import { useContext, createContext, useState, useEffect } from "react";
 
-import {db} from '@/app/firebase'
-import { getFirestore, collection, query, where, getDocs, addDoc } from 'firebase/firestore'
+import { db, auth, storage } from '@/app/firebase'
+import { getFirestore, collection, query, where, getDocs, addDoc, doc, updateDoc } from 'firebase/firestore'
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, setPersistence } from "firebase/auth";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 
 
 import { useRouter } from "next/navigation";
 
 import { GlobalAuth } from "./GlobalContext";
-
 const CommunityAuthContext = createContext();
 
-export const AuthContextProvider =({children}) => {
+export const AuthContextProvider = ({ children }) => {
     const auth = getAuth();
     const router = useRouter();
     const { authFirebase, emailLogOut, setAuthFirebase } = GlobalAuth();
@@ -22,59 +22,67 @@ export const AuthContextProvider =({children}) => {
         /* if(authFirebase == null) {
             router.push("http://localhost:3000/personal/login")
         } */
-      }, []);
+    }, []);
 
-    const emailSignIn = async (email, password) => {
+    const updateProfileData = async (nama, bio, lokasi, headerImage, profileImage) => {
         try {
-            await setPersistence(auth, "SESSION")
-            await signInWithEmailAndPassword(auth, email, password).then( async (userCredential) => {
-                    const q = query(collection(db, 'community'), where('userID', '==', userCredential.user.uid));
-                    const querySnapshot = await getDocs(q);
-                    const data = querySnapshot.docs.map(doc => doc.data());
-                    setAuthFirebase(userCredential.user)
-                    if(data.length == 0) {
-                        setAuthFirebase(null)
-                        emailLogOut()
-                    }
-                }
-            )
-        } catch (error) {
-            
-        }
-    };
-
-    const emailSignUp = async (email, password) => {
-        createUserWithEmailAndPassword(auth, email, password)
-        await createUserWithEmailAndPassword(auth, email, password)
-        .then(async (userCredential) => {
-          // Signed up 
-            const user = userCredential.user;
-            const Collection = collection(db, 'community')
-            const documentData = {
-                email : user.email,
-                userID : user.uid
+            const MAX_FILE_SIZe = 5 * 1024 * 1024;
+            const headerRefStorage = ref(storage, "profilePicture/" + authFirebase.uid + "-Header")
+            const profileRefStorage = ref(storage, "profilePicture/" + authFirebase.uid + "-Profile")
+            if (headerImage.size >= MAX_FILE_SIZe || profileImage.size >= MAX_FILE_SIZe) {
+                throw Error("File Size Limit Reached")
             }
-            const newData = await addDoc(Collection, documentData)
-          // ...
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorMessage)
-            // ..
-        });
-    };
+            await uploadBytes(headerRefStorage, headerImage)
+                .then(async (snapshot) => {
+                    console.log("Header uplaod")
+
+                    // Get ID or file name
+                    const headerID = snapshot.ref.name;
+                    await uploadBytes(profileRefStorage, profileImage)
+                        .then(async (snapshot) => {
+                            console.log("Profile uplaod")
+
+                            // Get ID or file name
+                            const profileID = snapshot.ref.name;
+
+                            let getData;
+                            const q = query(collection(db, 'community'), where('userID', '==', authFirebase.uid));
+                            const querySnapshot = await getDocs(q);
+                            querySnapshot.forEach((doc) => {
+                                // You can access the document data here
+                                getData = { ...doc.data(), id: doc.id }
+                            });
+                            const documentRef = doc(db, "community", getData.id)
+                            await updateDoc(
+                                documentRef,
+                                {
+                                    headerImageRef: headerID,
+                                    profileImageRef: profileID,
+                                    headerDownload: await getDownloadURL(headerRefStorage),
+                                    profileDownload: await getDownloadURL(profileRefStorage),
+                                    nama: nama,
+                                    bio: bio,
+                                    lokasi: lokasi
+                                }
+                            )
+                            console.log("Data updated")
+                        })
+                })
+        } catch (error) {
+            console.log("Error updating document : ", error.message)
+        }
+    }
+
 
     const value = {
-        emailSignIn,
-        emailSignUp,
+        updateProfileData
     };
 
 
     return (
-    <CommunityAuthContext.Provider value={value}>
-        {children}
-    </CommunityAuthContext.Provider>
+        <CommunityAuthContext.Provider value={value}>
+            {children}
+        </CommunityAuthContext.Provider>
     )
 }
 

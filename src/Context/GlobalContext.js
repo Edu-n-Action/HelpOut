@@ -2,7 +2,7 @@
 import { useContext, createContext, useState, useEffect } from "react";
 
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, setPersistence } from "firebase/auth";
-import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore'
+import { getFirestore, collection, query, where, getDocs, addDoc } from 'firebase/firestore'
 import { auth, db } from "@/app/firebase"
 
 import { useRouter } from "next/navigation";
@@ -46,7 +46,12 @@ export const FirebaseContextProvider = ({ children }) => {
                 const q = query(collection(db, 'community'), where('userID', '==', userCredential.user.uid));
                 const querySnapshot = await getDocs(q);
                 const data = querySnapshot.docs.map(doc => doc.data());
+                if (data.length == 0) {
+                    signOut(auth)
+                    return
+                }
                 setAuthFirebase(userCredential.user)
+                console.log(data)
             }
             )
         } catch (error) {
@@ -55,7 +60,6 @@ export const FirebaseContextProvider = ({ children }) => {
     };
 
     const emailSignUpCommunity = async (email, password) => {
-        createUserWithEmailAndPassword(auth, email, password)
         await createUserWithEmailAndPassword(auth, email, password)
             .then(async (userCredential) => {
                 // Signed up 
@@ -66,6 +70,7 @@ export const FirebaseContextProvider = ({ children }) => {
                     userID: user.uid
                 }
                 const newData = await addDoc(Collection, documentData)
+                console.log(newData)
                 // ...
             })
             .catch((error) => {
