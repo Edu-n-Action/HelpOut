@@ -70,7 +70,7 @@ const CommunityMember = ({
                       <button className="relative aspect-[20/20] w-[40%] active:bg-greenYellow">
                         <Image src={"/icon/yes2.svg"} alt={"yes"} fill />
                       </button>
-                      <button className="relative aspect-[20/20] w-[40%] active:bg-[pink]">
+                      <button className="relative aspect-[20/20] w-[40%] active:bg-[pink  ]">
                         <Image src={"/icon/no.svg"} alt={"yes"} fill />
                       </button>
                     </div>
