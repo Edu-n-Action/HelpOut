@@ -40,6 +40,42 @@ export const FirebaseContextProvider = ({ children }) => {
         }
     };
 
+    const emailSignInCommunity = async (email, password) => {
+        try {
+            await signInWithEmailAndPassword(auth, email, password).then(async (userCredential) => {
+                const q = query(collection(db, 'community'), where('userID', '==', userCredential.user.uid));
+                const querySnapshot = await getDocs(q);
+                const data = querySnapshot.docs.map(doc => doc.data());
+                setAuthFirebase(userCredential.user)
+            }
+            )
+        } catch (error) {
+            console.log(error.message)
+        }
+    };
+
+    const emailSignUpCommunity = async (email, password) => {
+        createUserWithEmailAndPassword(auth, email, password)
+        await createUserWithEmailAndPassword(auth, email, password)
+            .then(async (userCredential) => {
+                // Signed up 
+                const user = userCredential.user;
+                const Collection = collection(db, 'community')
+                const documentData = {
+                    email: user.email,
+                    userID: user.uid
+                }
+                const newData = await addDoc(Collection, documentData)
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorMessage)
+                // ..
+            });
+    };
+
     const emailSignUpPersonal = async (email, password) => {
         createUserWithEmailAndPassword(auth, email, password)
         await createUserWithEmailAndPassword(auth, email, password)
@@ -67,7 +103,9 @@ export const FirebaseContextProvider = ({ children }) => {
         emailLogOut,
         setAuthFirebase,
         emailSignUpPersonal,
-        emailSignInPersonal
+        emailSignInPersonal,
+        emailSignUpCommunity,
+        emailSignInCommunity
     };
 
 
