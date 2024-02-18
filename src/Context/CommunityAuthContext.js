@@ -19,9 +19,9 @@ export const AuthContextProvider =({children}) => {
 
 
     useEffect(() => {
-        if(authFirebase == null) {
+        /* if(authFirebase == null) {
             router.push("http://localhost:3000/personal/login")
-        }
+        } */
       }, []);
 
     const emailSignIn = async (email, password) => {
