@@ -2,28 +2,53 @@
 
 import { useState } from "react";
 
-const RoleBlock = ({ title }) => {
-  const [choosen, setChoosen] = useState(0);
-  const bg = ["#EFEFEF", "#CEFD4A"];
-  const border = ["#2F3A47", "#2F3A47"];
+const ListRole = ["Ketua", "Anggota", "Sekretaris", "Bendahara"];
+
+const RoleBlock = ({
+  setPeers = () => {},
+  peers = {
+    name: "Salman Faiz",
+    join: true,
+    role: "",
+    jobdesk: "",
+  },
+}) => {
   return (
-    <button
-      onClick={() => setChoosen(1 - choosen)}
-      className="aspect-[352/40] w-full flex justify-center items-center bg-greydef rounded-[2.4%/24%]"
-    >
-      <div className="aspect-[352/38] w-[99%] bg-back rounded-[2.4%/24%] px-[4%] py-[1%] flex flex-row justify-start items-center gap-[3%] text-[4vw] md:text-[1.4vw]">
-        <div
-          className="w-[6%] aspect-[1/1] flex justify-center items-center rounded-[50%/50%]"
-          style={{ backgroundColor: border[choosen] }}
-        >
-          <div
-            className="aspect-[1/1] w-[92%] rounded-[50%/50%]"
-            style={{ backgroundColor: bg[choosen] }}
-          ></div>
+    <div className="flex flex-col aspect-[387/75] w-[100%] justify-between text-greyprime">
+      <div className="flex flex-row aspect-[387/27] justify-between w-[100%]">
+        <div className="flex flex-col aspect-[241/40] w-[62%] bg-greydef justify-center shadow-lg items-center rounded-[3%/14%]">
+          <div className="flex flex-row gap-[4%] aspect-[241/37] w-[98%] bg-back rounded-[3%/14%] justify-start pl-[5%] items-center">
+            <div className="aspect-[1/1] w-[7%] bg-greyprime flex justify-center items-center rounded-[50%/50%]">
+              <div className="aspect-[1/1] w-[89%] bg-back rounded-[50%/50%]"></div>
+            </div>
+            <div className="w-[80%] rounded-[50%/50%] text-[1.2vw]">
+              {peers.name}
+            </div>
+          </div>
         </div>
-        <div className="flex items-center">{title}</div>
+        <div className="flex flex-col aspect-[140/40] text-center w-[35%] bg-greydef justify-center shadow-lg items-center rounded-[3%/14%]">
+          <div className="flex flex-col text-[1vw] aspect-[120/33] text-center justify-center items-center w-[97%] bg-back rounded-[3%/14%]">
+            <select className="flex flex-col text-[1vw] aspect-[100/20] text-center justify-center items-center w-[70%] bg-back rounded-[3%/14%]">
+              <option defaultValue={"Anggota"}>Anggota</option>
+              {ListRole.map((item, index) => {
+                return (
+                  <option key={index} value={item}>
+                    {item}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        </div>
       </div>
-    </button>
+      <div className="shadow-lg flex flex-row justify-center items-center aspect-[387/29] rounded-[1%/8%] w-[100%] bg-greydef">
+        <input
+          className="w-[99%] aspect-[387/26] rounded-[1%/10%] text-greyprime outline-0 text-[1vw] pl-[2%] pr-[3%]"
+          placeholder={"Masukkan deskripsi pekerjaan"}
+          type={"text"}
+        />
+      </div>
+    </div>
   );
 };
 
@@ -62,17 +87,14 @@ const SelectPeers = ({ setStep, step }) => {
       </h1>
 
       <div className="flex flex-col justify-start bg-back h-fit w-[90%]">
-        <div className="h-fit flex flex-col overflow-auto w-full gap-[15px] md:gap-[20px]">
-          <div className="h-fit w-full items-center text-[5.4vw] md:text-[1.6vw]">
-            <div>Choose from library</div>
-          </div>
+        <div className="h-fit flex flex-col overflow-auto w-full gap-[15px] md:gap-[20px] mt-[3%]">
           {people.map((item, index) => {
             return <RoleBlock key={index} setPeers={setPeers} peers={item} />;
           })}
-          <div className="aspect-[379/60] w-[100%] flex justify-between text-[4.8vw] md:text-[2vw]">
+          <div className="aspect-[379/60] w-[100%] mt-[3%] flex justify-between text-[4.8vw] md:text-[2vw]">
             <button
               onClick={() => {
-                setStep(step + 1);
+                // setStep(step + 1);
               }}
               className="bg-greenYellow rounded-[4%/10%] w-[48%] aspect-[180/60] active:bg-[lightgreen]"
             >
