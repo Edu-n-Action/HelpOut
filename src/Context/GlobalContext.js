@@ -67,7 +67,12 @@ export const FirebaseContextProvider = ({ children }) => {
                 const Collection = collection(db, 'community')
                 const documentData = {
                     email: user.email,
-                    userID: user.uid
+                    userID: user.uid,
+                    member: [],
+                    waitingList: [],
+                    donation: [],
+                    events: [],
+                    profileFilled: false
                 }
                 const newData = await addDoc(Collection, documentData)
                 console.log(newData)
@@ -90,7 +95,11 @@ export const FirebaseContextProvider = ({ children }) => {
                 const Collection = collection(db, 'User')
                 const documentData = {
                     email: user.email,
-                    userID: user.uid
+                    userID: user.uid,
+                    eventDiikuti: [],
+                    communityDiikuti: null,
+                    pendingCommunity: null,
+                    profileFilled: false
                 }
                 const newData = await addDoc(Collection, documentData)
                 // ...
