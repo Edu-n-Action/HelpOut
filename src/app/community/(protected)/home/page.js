@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div className="w-full h-fit">
       {" "}
-      <Navbar community={false} />
+      <Navbar community={true} />
       <CommunityHomepage />
     </div>
   );

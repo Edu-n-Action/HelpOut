@@ -5,6 +5,7 @@ const Home = () => {
   return (
     <div className="w-full h-fit">
       {" "}
+      <Navbar community={false} />
       <PersonalHomepage />
     </div>
   );

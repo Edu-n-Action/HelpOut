@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Navbar from "../homepage/navbar/Navbar";
 
 const NotifBlock = ({ message }) => {
   return (
@@ -16,6 +17,7 @@ const NotifBlock = ({ message }) => {
 };
 
 const Notif = ({
+  community = true,
   notifList = [
     "You have been assigned to event A Yoasl;dlkasdlks ajldja dlkajld kkajsld lku have been assigned to event A You have been assigned to event AYou have been assigned to event A",
     "You have been assigned to event A",
@@ -30,6 +32,7 @@ const Notif = ({
 }) => {
   return (
     <div className="w-full h-full bg-back overflow-auto">
+      <Navbar community={community} />
       <div className="hidden md:inline fixed md:aspect-[1440/465] w-[100%] bottom-0 z-0">
         <Image srcset={"/ornaments/wavy-low-deks.svg"} alt={"wave"} fill />
       </div>

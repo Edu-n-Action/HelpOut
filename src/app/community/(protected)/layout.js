@@ -8,7 +8,6 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <AuthContextProvider>
-      <Navbar community={true} />
       <div className="w-full h-full">{children}</div>
     </AuthContextProvider>
   );
