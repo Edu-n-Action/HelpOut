@@ -1,22 +1,16 @@
-"use client";
+import AddButton from "@/components/homepage/add/Addbutton";
+import CommunityHomepage from "@/components/homepage/communityHomepage";
+import PersonalHomepage from "@/components/homepage/communityHomepage";
+import Navbar from "@/components/homepage/navbar/Navbar";
 
-import { useState } from "react";
-
-const Modal = () => {
-  return <div className="aspect-[200/200] w-[50%] bg-[blue]"></div>;
-};
-
-const DonationHome = () => {
-  const [showModal, setShowModal] = useState(false);
-  const toggleModal = () => {
-    setShowModal(!showModal);
-  };
+const Home = () => {
   return (
-    <div>
-      <button onClick={toggleModal}>Open Modal</button>
-      {showModal && <Modal onClick={toggleModal} />}
+    <div className="w-full h-fit">
+      {" "}
+      <Navbar community={true} buttonLink="1" />
+      <CommunityHomepage />
     </div>
   );
 };
 
-export default DonationHome;
+export default Home;

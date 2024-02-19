@@ -31,7 +31,7 @@ const CommunityHeader = ({
         <div className="w-full h-fit md:text-[1.1vw] text-[3.2vw] mb-[4%]">
           {data.bio}
         </div>
-        <div className="w-full flex flex-row justify-center h-fit md:text-[1.2vw] text-[3.3vw] mb-[4%]">
+        <div className="w-full flex flex-row justify-center h-fit md:text-[1.2vw] text-[3.3vw] mb-[2%]">
           <b>{data.eventCount}</b>&nbsp;
           {data.eventCount > 1 ? <div>Events</div> : <div>Event</div>}
           &nbsp;&nbsp;

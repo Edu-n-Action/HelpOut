@@ -1,25 +1,34 @@
-import React from 'react'
+import Image from "next/image";
+import React from "react";
 
-function communityCard() {
-    return (
-        <div className='w-full p-3 flex-col items-start bg-blue-300 rounded-[2.5%/4%]'>
-            <div className='w-full relative'>
-                <div className='w-full p-3 absolute h-16 bg-greydef rounded-[5px]'>
-
-                </div>
-            </div>
-
-
-            <div className='relative z-[99] mb-[40px] mt-[40px]  md:mt-[10%] ml-[5px]'>
-                <div className='rounded-[50%] aspect-[1/1] w-[50px] border-2 border-greyprime bg-greydef'>
-
-                </div>
-                <h2 className='text-lg font-semibold mt-2'>
-                    Komunitas Marginal
-                </h2>
-            </div>
+const communityCard = ({
+  data = {
+    title: "Komunitas Sekolah Marjinal",
+    header: "",
+    profile: "",
+  },
+}) => {
+  console.log(data);
+  return (
+    <div className="aspect-[50/20] w-full my-[2%] shadow-xl bg-greydef flex justify-center rounded-[3%/7%] items-center">
+      <div className="aspect-[50/19] w-[98%] p-[2%] flex-col items-start bg-back rounded-[3%/7%]">
+        <div className="w-full relative">
+          <div className="aspect-[40/5] w-full p-[2%] absolute bg-greydef rounded-[3%]">
+            {data.header !== "" && <Image src={data.header} alt={""} fill />}
+          </div>
         </div>
-    )
-}
 
-export default communityCard
+        <div className="relative z-20 mt-[7%] ml-[2%]">
+          <div className="rounded-[50%] aspect-[1/1] w-[10%] border-2 border-greyprime bg-greydef">
+            {data.profile !== "" && <Image src={data.profile} alt={""} fill />}
+          </div>
+          <h2 className="text-[3.4vw] md:text-[1vw] font-semibold mt-[1.4%]">
+            {data.title}
+          </h2>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default communityCard;

@@ -1,3 +1,4 @@
+import Navbar from "@/components/homepage/navbar/Navbar";
 import Menu from "./Menu";
 
 const {
@@ -7,6 +8,7 @@ const {
 const Community = () => {
   return (
     <div className="w-full h-fit min-h-screen bg-back flex flex-col items-center">
+      <Navbar community={true} />
       <div className="w-full md:w-[33%] bg-back">
         <CommunityHeader />
         <div className="w-full bg-back">

@@ -4,7 +4,7 @@ import SignupForm from "@/components/auth/formSignUp/SignupForm";
 function page() {
   return (
     <div className="h-screen w-full bg-[#2F3A47] flex items-center flex-col">
-      <h1 className="text-5xl text-white mt-[115px]">
+      <h1 className="text-5xl text-white font-semibold mt-[115px]">
         <span className="text-[#CEFD4A]">Help</span>
         <span className="text-white">Out</span> App
       </h1>
