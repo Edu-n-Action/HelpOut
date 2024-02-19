@@ -70,7 +70,7 @@ export const FirebaseContextProvider = ({ children }) => {
                     userID: user.uid,
                     member: [],
                     waitingList: [],
-                    donation: [],
+                    donations: [],
                     events: [],
                     profileFilled: false
                 }
@@ -111,6 +111,11 @@ export const FirebaseContextProvider = ({ children }) => {
                 // ..
             });
     };
+
+    // TODO
+    const AddDonor = async (idDonasi, nama, jumlah) => {
+
+    }
 
     const value = {
         authFirebase,

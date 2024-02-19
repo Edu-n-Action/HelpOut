@@ -70,12 +70,176 @@ export const AuthContextProvider = ({ children }) => {
                 })
         } catch (error) {
             console.log("Error updating document : ", error.message)
+            
         }
+    }
+
+    const uploadDonationLink = async (headerImage, qrImage, judul, ceritaDonasi, dayEnd, dayStart, target, noRek, pesanTerimakasih) => {
+        try {
+            const MAX_FILE_SIZe = 5 * 1024 * 1024;
+    
+            let getData;
+            const q = query(collection(db, 'community'), where('userID', '==', authFirebase.uid));
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+                // You can access the document data here
+                getData = { ...doc.data(), id: doc.id }
+            });
+            const communityRef = doc(db, "community", getData.id)
+            const donationRef = await addDoc(collection(db, "Donasi"), {
+                communityLink : communityRef,
+                ceritaDonasi : ceritaDonasi,
+                judul : judul, 
+                dayEnd : dayEnd, 
+                dayStart : dayStart,
+                target : target,
+                noRek : noRek,
+                pesanTerimakasih : pesanTerimakasih,
+                active : true,
+            })
+            console.log("Donation Created")
+    
+            const documentRef = doc(db, "community", getData.id)
+            await updateDoc(
+                documentRef,
+                {
+                    donations : [...getData.donations, donationRef.id]
+                }
+            )
+            const headerRefStorage = ref(storage, "DonationEventHeader/" + donationRef.id + "-HeaderDonation")
+            const qrImageRefStorage = ref(storage, "donationLink/" + donationRef.id + "-QRDonation")
+    
+            if (headerImage.size >= MAX_FILE_SIZe || qrImage.size >= MAX_FILE_SIZe) {
+                throw Error("File Size Limit Reached")
+            }
+
+            const snapshotHeader = await uploadBytes(headerRefStorage, headerImage);
+            const snapshotQR = await uploadBytes(qrImageRefStorage, qrImage);
+            console.log("Image Uploaded")
+
+            await updateDoc(doc(db, "Donasi", donationRef.id), {
+                headerID : snapshotHeader.ref.name,
+                qrID : snapshotQR.ref.name,
+                profileCommunityLink : getData.profileDownload,
+                headerDownloadURL : await getDownloadURL(headerRefStorage),
+                qrDownloadURL : await getDownloadURL(qrImageRefStorage)
+            })
+            console.log("Successs")
+        } catch (error) {
+            throw Error(error.message)
+        }
+    }
+
+    const uploadNewEvent = async (headerImage, thumbnailImage, judul, keterangan, dayEnd, dayStart, anggota, panduan) => {
+        try {
+            const MAX_FILE_SIZe = 5 * 1024 * 1024;
+            if (headerImage.size >= MAX_FILE_SIZe || ThumbnailImageRefStorage.size >= MAX_FILE_SIZe) {
+                throw Error("File Size Limit Reached")
+            }
+            let getData;
+            const q = query(collection(db, 'community'), where('userID', '==', authFirebase.uid));
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+                // You can access the document data here
+                getData = { ...doc.data(), id: doc.id }
+            });
+            const communityRef = doc(db, "community", getData.id)
+
+            // Proseskan anggota
+
+            // End Proseskan anggota
+
+            const eventRef = await addDoc(collection(db, "Donasi"), {
+                communityLink : communityRef,
+                keterangan : keterangan,
+                judul : judul, 
+                dayEnd : dayEnd, 
+                dayStart : dayStart,
+                panduan : panduan,
+                anggota : anggota,
+                active : true
+            })
+            console.log("Event Created")
+    
+            const documentRef = doc(db, "community", getData.id)
+            await updateDoc(
+                documentRef,
+                {
+                    events : [...getData.events, donationRef.id]
+                }
+            )
+            const headerRefStorage = ref(storage, "DonationEventHeader/" + eventRef.id + "-HeaderEvent")
+            const ThumbnailImageRefStorage = ref(storage, "donationLink/" + eventRef.id + "-ThumbnailEvent")
+
+            const snapshotHeader = await uploadBytes(headerRefStorage, headerImage);
+            const snapshotThumbnail = await uploadBytes(ThumbnailImageRefStorage, thumbnailImage);
+            console.log("Image Uploaded")
+
+            await updateDoc(doc(db, "Events", donationRef.id), {
+                headerID : snapshotHeader.ref.name,
+                thumbnailID : snapshotThumbnail.ref.name,
+                profileCommunityLink : getData.profileDownload,
+                headerDownloadURL : await getDownloadURL(headerRefStorage),
+                thumbnailDownloadURL : await getDownloadURL(ThumbnailImageRefStorage)
+            })
+            console.log("Successs")
+        } catch (error) {
+            throw Error(error.message)
+        }
+    }
+
+    const uploadBukuPanduan = async (filePDf, judul) => {
+        try {
+            const MAX_FILE_SIZe = 5 * 1024 * 1024;
+            if (filePDf.size >= MAX_FILE_SIZe ) {
+                throw Error("File Size Limit Reached")
+            }
+            let getData;
+            const q = query(collection(db, 'community'), where('userID', '==', authFirebase.uid));
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+                // You can access the document data here
+                getData = { ...doc.data(), id: doc.id }
+            });
+            const communityRef = doc(db, "community", getData.id )
+            const subBukuPanduanRef = collection(communityRef, "bukuPanduan")
+            
+            const documenIDRef = await addDoc(subBukuPanduanRef, {
+                judul : judul,
+                filePDf: filePDf
+            })
+            console.log("Buku Panduan uploaded")
+            
+            const panduanStorageRef = ref(storage, "BukuPanduan/" + documenIDRef.id + "-Panduan-" + getData.id);
+            const snapshotPDF = await uploadBytes(panduanStorageRef, filePDf);
+            console.log("PDF Uplaoded")
+            await updateDoc(documenIDRef, {
+                pdfID : snapshotPDF.ref.name,
+                pdfDownloadURL : await getDownloadURL(panduanStorageRef)
+            })
+            console.log("Successs")
+        } catch (error) {
+            throw Error(error.message)
+        }
+        
+    }
+
+    // Add member
+    const addMember = async (idMember) => {
+
+    }
+
+    // Reject Member
+    const rejectMember = async (idMember) => {
+
     }
 
 
     const value = {
-        updateProfileData
+        updateProfileData,
+        uploadDonationLink,
+        uploadNewEvent,
+        uploadBukuPanduan
     };
 
 
