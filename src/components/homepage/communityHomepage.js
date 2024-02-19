@@ -224,8 +224,8 @@ const CommunityHomepage = ({
               </div>
             </div>
           ))}
-        <div className="relative z-2 aspect-[387/40] md:aspect-[387/85] w-full">
-          <div className="aspect-[387/40] md:aspect-[387/85] w-full"></div>
+        <div className="relative z-2 aspect-[387/110] md:aspect-[387/115] w-full">
+          <div className="aspect-[387/110] md:aspect-[387/115] w-full"></div>
         </div>
       </div>
     </div>
