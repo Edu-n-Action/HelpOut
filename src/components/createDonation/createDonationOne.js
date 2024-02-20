@@ -4,31 +4,45 @@ import Image from "next/image";
 import dateData from "@/const/cdate";
 import InputDate from "@/components/common/input/inputDate";
 import InputImage from "@/components/common/input/inputImage";
+import { useState } from "react";
 
-import React from 'react'
+import React from "react";
 
-function createDonation({ SetData, Data, SetIndex }) {
+function CreateDonationOne({ SetData, Data, SetIndex }) {
   const changeData = (key, value) => {
-    SetData(old => {
+    SetData((old) => {
       return {
         ...old,
-        [key]: value
-      }
-    })
-  }
+        [key]: value,
+      };
+    });
+  };
 
   const setHeaderPicture = (value) => {
-    SetData(old => {
+    SetData((old) => {
       return {
         ...old,
-        "gambar": value
-      }
-    })
-  }
+        gambar: value,
+      };
+    });
+  };
 
   const data = [
-    { title: "Title", type: "text", placeholder: "Masukkan judul kegiatan", key: "title" },
+    {
+      title: "Title",
+      type: "text",
+      placeholder: "Masukkan judul kegiatan",
+      key: "title",
+    },
   ];
+  const [dateStart, setDateStart] = useState([0, 0, 0]);
+  const [dateEnd, setDateEnd] = useState([0, 0, 0]);
+
+  console.log(dateStart);
+  console.log(dateEnd);
+
+  console.log(getDate(dateStart));
+  console.log(getDate(dateEnd));
   return (
     <>
       <div className="w-full aspect-[379/127] flex flex-col justify-between">
@@ -36,7 +50,11 @@ function createDonation({ SetData, Data, SetIndex }) {
           <div className="aspect-[379/27] text-[4.8vw] md:text-[1.2vw]">
             Add header
           </div>
-          <InputImage SetValue={(value) => setHeaderPicture(value)} value={Data.gambar} className="aspect-[379/100] w-full rounded-[3%/10%]" />
+          <InputImage
+            SetValue={(value) => setHeaderPicture(value)}
+            value={Data.gambar}
+            className="aspect-[379/100] w-full rounded-[3%/10%]"
+          />
         </div>
       </div>
       {data.map((item, index) => {
@@ -58,7 +76,7 @@ function createDonation({ SetData, Data, SetIndex }) {
                 placeholder={item.placeholder}
                 type={item.type}
                 onChange={(e) => changeData(item.key, e.target.value)}
-                value={Data['title']}
+                value={Data["title"]}
               />
             </div>
           </div>
@@ -84,14 +102,14 @@ function createDonation({ SetData, Data, SetIndex }) {
             Date Started
           </div>
 
-          <InputDate />
+          <InputDate SetValue={setDateStart} value={dateStart} />
         </div>
 
         <div className="w-full flex flex-col justify-around aspect-[379/90]">
           <div className="w-full aspect-[379/21] text-[4.8vw] md:text-[1.8vw]">
             Date Ended
           </div>
-          <InputDate />
+          <InputDate SetValue={setDateEnd} value={dateEnd} />
         </div>
       </div>
       <div className="aspect-[379/60] w-[100%] flex justify-between text-[4.8vw] md:text-[2vw]">
@@ -99,7 +117,10 @@ function createDonation({ SetData, Data, SetIndex }) {
           type="button"
           value="Next"
           className="bg-greenYellow rounded-[4%/10%] w-[48%] aspect-[180/60] active:bg-[lightgreen]"
-          onClick={(e) => { console.log(Data); SetIndex(1) }}
+          onClick={(e) => {
+            console.log(Data);
+            SetIndex(1);
+          }}
         />
         <input
           type="button"
@@ -108,7 +129,7 @@ function createDonation({ SetData, Data, SetIndex }) {
         />
       </div>
     </>
-  )
+  );
 }
 
-export default createDonation
+export default CreateDonationOne;

@@ -21,40 +21,46 @@ export default function FormDonation(submit) {
     qrCode: undefined,
     gambar: undefined,
     bank: "",
-    pesanTerimaKasih: ""
-  })
+    pesanTerimaKasih: "",
+  });
 
-  const [index, SetIndex] = useState(0)
+  const [index, SetIndex] = useState(0);
   const data = [
     { title: "Title", type: "text", placeholder: "Masukkan judul kegiatan" },
   ];
   const tes = (e) => {
     e.preventDefault();
   };
+
   return (
     <>
       <h1 className="aspect-[430/50] w-[90%] text-[7.5vw] md:text-[3vw] text-product text-left">
-        {index == 0 ? "Make a Donation" :
-          index == 1 ? "Add Donation Center" : ""
-        }
+        {index == 0
+          ? "Make a Donation"
+          : index == 1
+          ? "Add Donation Center"
+          : ""}
       </h1>
       <div className="aspect-[379/688] w-[88.13%]">
         <form
           onSubmit={tes}
           className="flex flex-col aspect-[379/788] w-[100%] gap-[3%]"
         >
-          {
-            index == 0 ?
-              <CreateDonationOne Data={dataDonasi} SetData={SetDataDonasi} SetIndex={SetIndex} />
-              :
-
-              <CreateDonationTwo Data={dataDonasi} SetData={SetDataDonasi} SetIndex={SetIndex} />
-          }
-
+          {index == 0 ? (
+            <CreateDonationOne
+              Data={dataDonasi}
+              SetData={SetDataDonasi}
+              SetIndex={SetIndex}
+            />
+          ) : (
+            <CreateDonationTwo
+              Data={dataDonasi}
+              SetData={SetDataDonasi}
+              SetIndex={SetIndex}
+            />
+          )}
         </form>
       </div>
     </>
-
-
   );
 }

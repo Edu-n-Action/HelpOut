@@ -18,7 +18,6 @@ export default function FormEvent(submit, setStep, step) {
   ];
   const tes = () => {};
 
-  const date = new Date();
   const [dateStart, setDateStart] = useState([0, 0, 0]);
   const [dateEnd, setDateEnd] = useState([0, 0, 0]);
 
