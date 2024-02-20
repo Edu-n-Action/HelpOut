@@ -4,6 +4,8 @@ import Image from "next/image";
 import dateData from "@/const/cdate";
 import InputDate from "@/components/common/input/inputDate";
 import InputImage from "@/components/common/input/inputImage";
+import { useState } from "react";
+import getDate from "@/components/utils/getDate";
 
 export default function FormEvent(submit, setStep, step) {
   const data = [
@@ -15,6 +17,17 @@ export default function FormEvent(submit, setStep, step) {
     },
   ];
   const tes = () => {};
+
+  const date = new Date();
+  const [dateStart, setDateStart] = useState([0, 0, 0]);
+  const [dateEnd, setDateEnd] = useState([0, 0, 0]);
+
+  console.log(dateStart);
+  console.log(dateEnd);
+
+  console.log(getDate(dateStart));
+  console.log(getDate(dateEnd));
+
   return (
     <>
       <h1 className="aspect-[430/50] w-[90%] text-[7.5vw] md:text-[3vw] text-product text-left">
@@ -68,14 +81,14 @@ export default function FormEvent(submit, setStep, step) {
               <div className="w-full aspect-[379/21] text-[4.8vw] md:text-[1.8vw]">
                 Date Started
               </div>
-              <InputDate />
+              <InputDate SetValue={setDateStart} value={dateStart} />
             </div>
 
             <div className="w-full flex flex-col justify-around aspect-[379/90]">
               <div className="w-full aspect-[379/21] text-[4.8vw] md:text-[1.8vw]">
                 Date Ended
               </div>
-              <InputDate />
+              <InputDate SetValue={setDateEnd} value={dateEnd} />
             </div>
           </div>
           <div className="aspect-[379/60] w-[100%] flex justify-between text-[4.8vw] md:text-[2vw]">

@@ -14,7 +14,7 @@ const PersonalHeader = ({
 }) => {
   return (
     <div className="relative w-full flex flex-col items-center bg-back">
-      <div className="aspect-[387/100] w-full font-semibold flex justify-center items-end mb-[4%]">
+      <div className="aspect-[387/100] w-full font-semibolds flex justify-center items-end mb-[4%]">
         <div className="text-[7.5vw] md:text-[2.5vw] w-[90%] text-product">
           More
         </div>

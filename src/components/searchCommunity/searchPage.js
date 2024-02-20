@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-import InputText from "../common/inputText/inputText";
+import InputText from "../common/input/inputText";
 import CommunityCard from "./communityCard";
 
 const searchPage = () => {

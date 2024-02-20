@@ -8,7 +8,7 @@ import SelectPeers from "./selectPeers";
 const { default: FormEvent } = require("./formEvent");
 
 const HandleCreateEvent = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
 
   switch (step) {
     case 0:

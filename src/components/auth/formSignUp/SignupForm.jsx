@@ -1,53 +1,52 @@
 "use client";
 import React, { useState } from "react";
-import InputTextTransparent from "@/components/common/inputText/inputTextTransparent";
+import InputTextTransparent from "@/components/common/input/inputTextTransparent";
 
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 import { GlobalAuth } from "@/Context/GlobalContext";
 
-import { db } from '@/app/firebase'
+import { db } from "@/app/firebase";
 function SignupForm({ community = true }) {
-  const { emailSignUpCommunity } = GlobalAuth()
+  const { emailSignUpCommunity } = GlobalAuth();
   const [signupData, SetSignup] = useState({
     email: undefined,
     password: undefined,
-    confirmPassword: undefined
-  })
+    confirmPassword: undefined,
+  });
 
   const setPassword = (value) => {
-    SetSignup(old => {
-      return { ...old, "password": value }
-    })
-  }
+    SetSignup((old) => {
+      return { ...old, password: value };
+    });
+  };
 
   const setEmail = (value) => {
-    SetSignup(old => {
-      return { ...old, "email": value }
-    })
-  }
+    SetSignup((old) => {
+      return { ...old, email: value };
+    });
+  };
 
   const setConfirmPassword = (value) => {
-    SetSignup(old => {
-      return { ...old, "confirmPassword": value }
-    })
-  }
+    SetSignup((old) => {
+      return { ...old, confirmPassword: value };
+    });
+  };
 
   const submitForm = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
       if (community) {
-        emailSignUpCommunity(signupData.email, signupData.password)
+        emailSignUpCommunity(signupData.email, signupData.password);
       }
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
-
-
-  }
+  };
   return (
-    <form className="max-w-[600px] w-full flex flex-col items-center"
+    <form
+      className="max-w-[600px] w-full flex flex-col items-center"
       onSubmit={submitForm}
     >
       <div className="max-w-[550px] w-full mt-[60px] mb-[10px]">

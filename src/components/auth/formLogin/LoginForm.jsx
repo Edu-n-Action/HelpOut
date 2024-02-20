@@ -2,51 +2,65 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import InputTextTransparent from "@/components/common/inputText/inputTextTransparent";
+import InputTextTransparent from "@/components/common/input/inputTextTransparent";
 
-
-
-import { signInWithEmailAndPassword, browserSessionPersistence } from "firebase/auth";
-import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore'
-import { db, auth } from '@/app/firebase';
+import {
+  signInWithEmailAndPassword,
+  browserSessionPersistence,
+} from "firebase/auth";
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
+import { db, auth } from "@/app/firebase";
 
 import { PersonalAuth } from "@/Context/PersonalAuthContext";
 import { GlobalAuth } from "@/Context/GlobalContext";
 
 function LoginForm({ community = true }) {
   const router = useRouter();
-  const { emailLogOut, emailSignInPersonal, authFirebase, emailSignInCommunity } = GlobalAuth();
+  const {
+    emailLogOut,
+    emailSignInPersonal,
+    authFirebase,
+    emailSignInCommunity,
+  } = GlobalAuth();
 
   const [signinData, SetSignin] = useState({
     email: undefined,
     password: undefined,
-  })
+  });
 
   const setPassword = (value) => {
-    SetSignin(old => {
-      return { ...old, "password": value }
-    })
-  }
+    SetSignin((old) => {
+      return { ...old, password: value };
+    });
+  };
 
   const setEmail = (value) => {
-    SetSignin(old => {
-      return { ...old, "email": value }
-    })
-  }
-
+    SetSignin((old) => {
+      return { ...old, email: value };
+    });
+  };
 
   const submitLogin = async (event) => {
     event.preventDefault();
     try {
       if (community) {
-        await emailSignInCommunity(signinData.email, signinData.password)
+        await emailSignInCommunity(signinData.email, signinData.password);
       }
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
-  }
+  };
   return (
-    <form className="max-w-[600px] w-full flex flex-col items-center" onSubmit={submitLogin}>
+    <form
+      className="max-w-[600px] w-full flex flex-col items-center"
+      onSubmit={submitLogin}
+    >
       <div className="max-w-[550px] w-full mt-[60px] mb-[10px]">
         <h2 className="font-bold text-2xl">Login to your account</h2>
       </div>
@@ -73,7 +87,7 @@ function LoginForm({ community = true }) {
       <button
         className="bg-[#CEFD4A] py-3 w-full z-[10] text-center text-xl mt-9"
         type="button"
-        onClick={e => emailLogOut()}
+        onClick={(e) => emailLogOut()}
       >
         Logout
       </button>
