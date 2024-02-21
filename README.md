@@ -31,13 +31,22 @@ For volunteering members, the web app allows them to:
 - Firebase
   Firebase is used for the back end and the database. We store all users, communities, events, and donations data into it. Firebase is used because of simple implementation, robust built-in feature, secure server, and it is in the cloud
 
+## Prerequisites
+
+- Node.js
+- NPM (Node package manager)
+
 ## How to use it?
 
 - First, clone the repository using this command
   > ```
   > git clone https://github.com/Edu-n-Action/HelpOut.git
   > ```
-- Type this command to download all necessary module
+- Go to the web app directory by type
+  > ```
+  > cd HelpOut
+  > ```
+- Type this command to install all necessary module
   > ```
   > npm i
   > ```
@@ -46,11 +55,60 @@ For volunteering members, the web app allows them to:
   > npm run dev
   > ```
 - Then we can open the web app on `http://localhost:3000` to see the result.
+- You good to go
 
-### Login / Sign Up
+#### Login / Sign Up
 
 - Go to the main page
+- Select the account type you want (personal / community)
 - Click login / sign up
+- Enter the your email and password / choose option login / sign up with google
+- Then, you can start enter your account information later on
+
+### For Personal Account
+
+#### Joining a community
+
+- You can start join a community by clicking the home page and search all available community
+- After that, you can apply to the community and just wait for the community to accept your application
+- You can only apply to one community per account
+
+#### Attend / Permit an Event
+
+- Go to the event page
+- Select an event
+- Choose attend / permit the event
+
+### For Community Account
+
+#### Create an Event
+
+- Go to the homepage
+- Select the events button
+- Tap the add button on the bottom corner
+- Enter all necessary information of the new event save
+
+#### Create a donation
+
+- Go to the homepage
+- Select the fundraising button
+- Tap the add button on the bottom corner
+- Enter all necessary information of the donation and save
+- Your donation box will be live automatically on the web app
+
+#### Upload event's material to the library
+
+- Go to the community section
+- Choose library
+- Choose the add button on the bottom of the last material
+- Enter the title and upload the material to the web app
+
+### For Donating to the Community
+
+- Go the the donation link
+- Click the donate button
+- Scan the qr code provided and enter the amount of money
+- Your donation will be sent directly to the community
 
 ## Deployment
 
