@@ -9,11 +9,11 @@ import getDate from "@/components/utils/getDate";
 
 export default function FormEvent(submit, setStep, step) {
   const data = [
-    { title: "Judul", type: "text", placeholder: "Masukkan judul kegiatan" },
+    { title: "Title", type: "text", placeholder: "Insert event's title" },
     {
-      title: "Keterangan",
+      title: "Job Description",
       type: "text",
-      placeholder: "Masukkan penjelasan kegiatan",
+      placeholder: "Insert Job Description",
     },
   ];
   const tes = () => {};

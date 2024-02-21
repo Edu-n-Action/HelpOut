@@ -6,37 +6,42 @@ import Image from "next/image";
 import { PersonalAuth } from "@/Context/PersonalAuthContext";
 
 export default function FormData(submit) {
-  const { updateProfileData } = PersonalAuth()
+  const { updateProfileData } = PersonalAuth();
   const [profil, SetProfil] = useState({
     gambar: undefined,
     nama: undefined,
     lokasi: undefined,
     bio: undefined,
-    ttl: undefined
-  })
+    ttl: undefined,
+  });
   const changeData = (value, key) => {
     SetProfil((old) => {
-      return { ...old, [key]: value }
-    })
-  }
+      return { ...old, [key]: value };
+    });
+  };
   const data = [
-    { title: "Name", type: "text", placeholder: "Masukkan nama", key : "nama" },
+    { title: "Name", type: "text", placeholder: "Insert name", key: "nama" },
     {
       title: "Birthdate",
       type: "date",
-      placeholder: "Masukkan tanggal lahir",
-      key : "ttl"
+      placeholder: "Insert birthdate",
+      key: "ttl",
     },
     {
       title: "Location",
       type: "text",
-      placeholder: "Masukkan lokasi",
-      key : "lokasi"
+      placeholder: "Insert location",
+      key: "lokasi",
     },
   ];
   const tes = (e) => {
-    e.preventDefault()
-    updateProfileData(profil.nama, profil.bio, new Date(profil.ttl), profil.lokasi)
+    e.preventDefault();
+    updateProfileData(
+      profil.nama,
+      profil.bio,
+      new Date(profil.ttl),
+      profil.lokasi
+    );
   };
   return (
     <form
@@ -46,7 +51,9 @@ export default function FormData(submit) {
       <InputImage
         className="aspect-[1/1] w-[30%] rounded-[15%/15%]"
         add={true}
-        SetValue={(value) => {changeData(value, "gambar")}}
+        SetValue={(value) => {
+          changeData(value, "gambar");
+        }}
         value={profil.gambar}
       />
 

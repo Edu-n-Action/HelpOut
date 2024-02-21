@@ -85,14 +85,14 @@ function CreateDonationOne({ SetData, Data, SetIndex }) {
       })}
       <div className="relative w-full aspect-[379/179]">
         <div className="w-full aspect-[379/21] text-[4.8vw] md:text-[1.8vw] font-semibold">
-          Cerita Donasi Kita
+          Our Donation Story
         </div>
         <textarea
           className="w-full aspect-[379/155] rounded-[2%/5%] pl-[2%] pr-[10%] pt-[1%] flex justify-center"
           name="myBio"
           rows="4"
           cols="50"
-          placeholder="Masukkan cerita"
+          placeholder="Insert a story"
           value={Data.cerita}
           onChange={(e) => changeData("cerita", e.target.value)}
         ></textarea>

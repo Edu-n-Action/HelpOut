@@ -74,7 +74,7 @@ function CreateDonationTwo({ SetData, Data, SetIndex }) {
           Add Message
         </div>
         <div className="w-full aspect-[379/21] text-[3.1vw] md:text-[1.2vw]">
-          Berikan pesan terima kasih kepada donatur
+          Give a thanks message to the donor
         </div>
         <textarea
           className="w-full aspect-[379/155] rounded-[2%/5%] pl-[2%] pr-[10%] pt-[1%] flex justify-center"

@@ -7,7 +7,7 @@ import CommunityCard from "./communityCard";
 const searchPage = () => {
   let CommunityList = [
     {
-      title: "Komunitas",
+      title: "Community",
       header: "",
       profile: "",
     },

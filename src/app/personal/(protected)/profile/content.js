@@ -18,16 +18,17 @@ const Content = ({
         onClick={logout}
         className="text-[3vw] md:text-[1vw] aspect-[114/32] w-[29.4%] bg-greenYellow rounded-[3%/12%]"
       >
-        Ganti Akun
+        Switch Account
       </button>
       {!data.community && (
         <div className="w-[90%] mt-[10%] flex flex-col">
           <div className="text-[3.6vw] md:text-[1.2vw] font-semibold h-fit">
-            Komunitas
+            Community
           </div>
           <div className="aspect-[371/59] w-full mt-[4.2%] flex px-[10%] justify-center items-center rounded-[2%/12%]">
             <div className="text-[3vw] md:text-[1vw] text-center font-semibold">
-              &quot;Kamu belum terdaftar di komunitas manapun. Ayo daftar!&quot;
+              &quot;You haven&apos;t registered to any community. Register
+              now!&quot;
             </div>
           </div>
         </div>
@@ -35,7 +36,7 @@ const Content = ({
       {data.community && (
         <div className="w-[90%] mt-[10%] flex flex-col">
           <div className="text-[3.6vw] md:text-[1.2vw] font-semibold h-fit">
-            Komunitas
+            Community
           </div>
           <Link
             href={"./profile/edit/"}
@@ -52,7 +53,7 @@ const Content = ({
       )}
       <div className="w-[90%] mt-[10%] flex flex-col">
         <div className="text-[3.6vw] md:text-[1.2vw] font-semibold h-fit">
-          Lainnya
+          Another
         </div>
         <Link
           href={"./profile/edit/"}
@@ -60,7 +61,7 @@ const Content = ({
         >
           <div className="aspect-[371/56] w-[99.5%] flex items-center pl-[5%] bg-back rounded-[2%/12%]">
             <div className="text-[3vw] md:text-[1vw] font-semibold">
-              Pengaturan
+              Settings
             </div>
           </div>
         </Link>
