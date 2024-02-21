@@ -116,7 +116,7 @@ For volunteering members, the web app allows them to:
 
 We also have already provided the web app on [https://helpout-id.vercel.app/](https://helpout-id.vercel.app/)
 
-## Teams
+## Meet the Team
 
 - Salman Faiz Hidayat (Hustler)
 - Ken Bima Satria Gandasasmita (Hipster)
