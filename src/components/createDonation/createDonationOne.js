@@ -7,6 +7,7 @@ import InputImage from "@/components/common/input/inputImage";
 import { useState } from "react";
 
 import React from "react";
+import getDate from "../utils/getDate";
 
 function CreateDonationOne({ SetData, Data, SetIndex }) {
   const changeData = (key, value) => {

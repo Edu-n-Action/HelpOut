@@ -1,6 +1,6 @@
 # HelpOut
 
-Volunteering management app by Edu-n-action
+HelpOut is a comprehensive platform for community management. With features to assist tasks such as event management, fundrasing, community management, and more.
 
 ## About
 
@@ -26,24 +26,30 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## Watch the Trailer
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/77B_jcj-X-Y/0.jpg)](https://www.youtube.com/watch?v=77B_jcj-X-Y)
 
 ## Features
 
-- Arranging Event
-- Create Donation for the community
+Our web-app allows volunteering communities to:
+
+- Conduct/establish events with informations, peers selection for tasks, and upload materials (event flow)
+- Setup fundraisings with a website page that displays QR to donate and counts online donations, both events and fundraisings goes straight into the schedule calendar (fundraisings flow).
+- Store necessary materials in libraries for bookkeeping (libraries flow).
+
+For volunteering members, the web app allows them to:
+
+- Join a community
+- Attend and do tasks as assigned by the community.
+- Access to materials and information from the community.(one big flow)
 
 ## Tech Stack
 
 - Javascript
+  Javascript is used in order to build the front-end side of the web app
 - Firebase
+  Firebase is used for the back end and the database. We store all users, communities, events, and donations data into it.
 
 ## How to use it?
 
@@ -59,6 +65,11 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
   > ```
   > npm run dev
   > ```
+- Then we can open the web app on `http://localhost:3000` to see the result.
+
+## Deployment
+
+We also have already deployed the web app on
 
 ## Teams
 
