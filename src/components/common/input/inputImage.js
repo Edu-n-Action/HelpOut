@@ -20,8 +20,14 @@ function InputImage({
       )}
 
       {
-        value && (
-          <Image src={URL.createObjectURL(value)} fill={true} style={{ objectFit: `${fill ? "fill" : "cover"}` }} />
+        value.file && value.local && (
+          <img src={URL.createObjectURL(value)} fill={true} style={{ objectFit: `${fill ? "fill" : "cover"}` }} />
+        )
+      }
+
+      {
+        value.file && !value.local && (
+          <img src={value.file} fill={true} style={{ objectFit: `${fill ? "fill" : "cover"}` }} />
         )
       }
 

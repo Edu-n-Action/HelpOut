@@ -18,11 +18,7 @@ export const AuthContextProvider = ({ children }) => {
     const { authFirebase, emailLogOut, setAuthFirebase } = GlobalAuth();
 
 
-    useEffect(() => {
-        /* if(authFirebase == null) {
-            router.push("http://localhost:3000/personal/login")
-        } */
-    }, []);
+    
 
     const updateProfileData = async (nama, bio, lokasi, headerImage, profileImage) => {
         try {
@@ -306,6 +302,20 @@ export const AuthContextProvider = ({ children }) => {
         rejectMember,
         addMember
     };
+
+    useEffect(() => {
+        async function checkAuth() {
+            onAuthStateChanged(auth, (user) => {
+                if(user) {
+                    console.log("Success")
+                } else {
+                    console.log("Failed")
+                    router.push('/community/login')
+                }
+            })
+        }
+        checkAuth()
+    }, [authFirebase]);
 
 
     return (

@@ -3,6 +3,9 @@
 import Image from "next/image";
 import Navbar from "../homepage/navbar/Navbar";
 
+import { PersonalAuth } from "@/Context/PersonalAuthContext";
+
+
 const NotifBlock = ({ message }) => {
   return (
     <div className="h-fit w-full bg-greydef flex justify-center items-center rounded-[3%/15%] shadow-md">
@@ -30,8 +33,9 @@ const Notif = ({
     "You have been assigned to event B",
   ],
 }) => {
+  const { getDataSendiri, dataUser } = PersonalAuth();
   return (
-    <div className="w-full h-full bg-back overflow-auto">
+    <div className="w-full h-full min-h-screen bg-back overflow-auto">
       <Navbar community={community} />
       <div className="hidden md:inline fixed md:aspect-[1440/465] w-[100%] bottom-0 z-0">
         <Image srcset={"/ornaments/wavy-low-deks.svg"} alt={"wave"} fill />
@@ -45,7 +49,7 @@ const Notif = ({
             <h1 className="font-semibold text-[7.5vw] md:text-[2.5vw] text-product text-left pl-[2%]">
               Notification
             </h1>
-            {notifList.map((item, index) => {
+            {dataUser?.notification.length != 0 && dataUser?.notification.map((item, index) => {
               return <NotifBlock key={index} message={item} />;
             })}
           </div>

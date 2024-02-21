@@ -1,18 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import InputImage from "@/components/common/input/inputImage";
 import Image from "next/image";
 
 import { PersonalAuth } from "@/Context/PersonalAuthContext";
+import { useRouter } from "next/navigation";
 
 export default function FormData(submit) {
-  const { updateProfileData } = PersonalAuth()
+  const router = useRouter()
+  const { updateProfileData, dataUser } = PersonalAuth()
   const [profil, SetProfil] = useState({
-    gambar: undefined,
-    nama: undefined,
-    lokasi: undefined,
-    bio: undefined,
-    ttl: undefined
+    gambar: {file : dataUser?.profileDownload || undefined, local: false},
+    nama: dataUser?.nama || "",
+    lokasi: dataUser?.lokasi || "",
+    bio: dataUser?.bio || "",
+    ttl: dataUser?.ttl || ""
   })
   const changeData = (value, key) => {
     SetProfil((old) => {
@@ -34,10 +36,23 @@ export default function FormData(submit) {
       key : "lokasi"
     },
   ];
-  const tes = (e) => {
+  const tes = async (e) => {
     e.preventDefault()
-    updateProfileData(profil.nama, profil.bio, new Date(profil.ttl), profil.lokasi)
+    await updateProfileData(profil.nama, profil.bio, new Date(profil.ttl), profil.lokasi, profil.gambar )
+    router.push("/personal/profile")
   };
+  useEffect(() => {
+    SetProfil(old => {
+      return {
+        gambar: {file : dataUser?.profileDownload || undefined, local: false},
+        nama: dataUser?.nama || "",
+        lokasi: dataUser?.lokasi || "",
+        bio: dataUser?.bio || "",
+        ttl: dataUser?.ttl || ""
+      }
+      
+    })
+  },[dataUser])
   return (
     <form
       onSubmit={tes}
@@ -45,7 +60,7 @@ export default function FormData(submit) {
     >
       <InputImage
         className="aspect-[1/1] w-[30%] rounded-[15%/15%]"
-        add={true}
+        add={false}
         SetValue={(value) => {changeData(value, "gambar")}}
         value={profil.gambar}
       />
@@ -98,7 +113,7 @@ export default function FormData(submit) {
           />
           <input
             type="button"
-            onClick={() => {}}
+            onClick={() => {router.push('/personal/home')}}
             value="Discard"
             className="bg-greydef rounded-[4%/10%] w-[48%] aspect-[180/60] active:bg-[grey]"
           />

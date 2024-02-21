@@ -14,13 +14,13 @@ const communityCard = ({
       <div className="aspect-[50/19] w-[98%] p-[2%] flex-col items-start bg-back rounded-[3%/7%]">
         <div className="w-full relative">
           <div className="aspect-[40/5] w-full p-[2%] absolute bg-greydef rounded-[3%]">
-            {data.header !== "" && <Image src={data.header} alt={""} fill />}
+            {data.header !== "" && <img src={data.header} alt={"community"} className="object-fill" />}
           </div>
         </div>
 
         <div className="relative z-20 mt-[7%] ml-[2%]">
           <div className="rounded-[50%] aspect-[1/1] w-[10%] border-2 border-greyprime bg-greydef">
-            {data.profile !== "" && <Image src={data.profile} alt={""} fill />}
+            {data.profile !== "" && <img src={data.profile} alt={"communityc"} className="object-fill" />}
           </div>
           <h2 className="text-[3.4vw] md:text-[1vw] font-semibold mt-[1.4%]">
             {data.title}

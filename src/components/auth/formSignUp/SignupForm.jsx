@@ -1,5 +1,7 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+
 import InputTextTransparent from "@/components/common/input/inputTextTransparent";
 
 import { collection, addDoc } from "firebase/firestore";
@@ -9,6 +11,7 @@ import { GlobalAuth } from "@/Context/GlobalContext";
 
 import { db } from "@/app/firebase";
 function SignupForm({ community = true }) {
+  const router = useRouter()
   const { emailSignUpCommunity, emailSignUpPersonal } = GlobalAuth();
   const [signupData, SetSignup] = useState({
     email: undefined,
@@ -39,8 +42,10 @@ function SignupForm({ community = true }) {
     try {
       if (community) {
         emailSignUpCommunity(signupData.email, signupData.password);
+        router.push("/community/login")
       } else {
         emailSignUpPersonal(signupData.email, signupData.password);
+        router.push("/personal/login")
       }
     } catch (error) {
       console.log(error.message);

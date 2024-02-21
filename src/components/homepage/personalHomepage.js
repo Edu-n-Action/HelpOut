@@ -1,7 +1,12 @@
+"use client"
 import Image from "next/image";
+import { useState, useEffect } from "react";
 import ProgressBar from "../common/progressbar/progressBar";
 import EventTask from "../common/eventProfile/eventTask";
 import Navbar from "./navbar/Navbar";
+import { PersonalAuth } from "@/Context/PersonalAuthContext";
+
+
 
 const PersonalHomepage = ({
   eventList = [
@@ -51,6 +56,7 @@ const PersonalHomepage = ({
     fullName: "Ken Bima Satria G.",
   },
 }) => {
+  const { getDataSendiri, dataUser } = PersonalAuth();
   return (
     <div className="aspect-[430/932] min-h-fit h-screen w-full md:aspect-auto md:flex md:justify-center bg-back overflow-y-scroll">
       <div className="hidden md:inline absolute md:aspect-[1440/465] w-[100%] bottom-0 z-0">
@@ -65,17 +71,17 @@ const PersonalHomepage = ({
           <div className="aspect-[309/68] flex flex-col gap-[0%] w-[80%]">
             <div className="text-[5.2vw] md:text-[1.73vw] h-[45%]">Hello,</div>
             <div className="font-semibold text-[5.3vw] md:text-[1.76vw] items-start">
-              {user.fullName}
+              {dataUser?.nama} 
             </div>
           </div>
           <div className="aspect-[1/1] w-[17%] rounded-[15%/15%] bg-[darkgrey]">
-            {user.picture != "" && (
-              <Image src={user.picture} alt={"picture"} fill />
+            {dataUser?.profileDownload != "" && (
+              <img src={dataUser?.profileDownload} alt={"picture"} className="object-fill" />
             )}
           </div>
         </div>
 
-        {eventList.length ? (
+        {dataUser?.eventDiikuti.length ? (
           <>
             <div className="relative z-2 w-[90%] aspect-[387/120] gap-[3.5%] mt-[7.5%]">
               <ProgressBar
@@ -99,13 +105,13 @@ const PersonalHomepage = ({
           <div className="relative z-2 w-[90%] aspect-[387/120] flex justify-center items-center gap-[3.5%] mt-[25%] md:mt-[7.5%]">
             <div className="aspect-[300/171] mt-[10%] w-[100%] z-1 bg-greydef flex justify-center items-center rounded-[6%/10%]">
               <div className="aspect-[300/171] w-[99%] bg-back active:bg-greydef flex justify-center items-center rounded-[6%/10%]">
-                <button className="relative aspect-[300/171] w-[90%] rounded-[6%/10%]">
+                <a className="relative aspect-[300/171] w-[90%] rounded-[6%/10%] cursor-pointer" href="/personal/community">
                   <Image
                     src={"/properties/findingCommunity.svg"}
                     alt={"Let's find a community for you"}
                     fill
                   />
-                </button>
+                </a>
               </div>
             </div>
           </div>

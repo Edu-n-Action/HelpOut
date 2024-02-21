@@ -3,7 +3,7 @@ import { useContext, createContext, useState, useEffect } from "react";
 
 import { db, auth, storage } from '@/app/firebase'
 import { getFirestore, collection, query, where, getDocs, addDoc, updateDoc, doc, orderBy, limit, startAt, endAt } from 'firebase/firestore'
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, setPersistence, browserSessionPersistence } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 
 
@@ -16,14 +16,15 @@ const PersonalAuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
     const router = useRouter();
     const [dataUser, SetDataUser] = useState(null);
-    const { authFirebase } = GlobalAuth();
+    const { authFirebase, setAuthFirebase } = GlobalAuth();
 
-    useEffect(() => {
-        console.log(authFirebase)
-      }, [authFirebase]);
+    
 
     const updateProfileData = async (nama, bio, ttl, lokasi, profileImage) => {
         try {
+            if(nama == "" & bio == "" & ttl == "", lokasi == "" & profileImage == undefined) {
+                console.log("Belum diisi semua")
+            }
             const MAX_FILE_SIZe = 5 * 1024 * 1024;
             const profileRefStorage = ref(storage, "profilePicture/" + authFirebase.uid + "-Profile")
             if (profileImage.size >= MAX_FILE_SIZe) {
@@ -59,7 +60,23 @@ export const AuthContextProvider = ({ children }) => {
     }
 
     const getDataSendiri = async () => {
+        try {
+            if(authFirebase == null) {
+                return
+            } else {
+            let getData;
+                const q = query(collection(db, 'User'), where('userID', '==', authFirebase.uid));
+                const querySnapshot = await getDocs(q);
+                querySnapshot.forEach((doc) => {
+                    // You can access the document data here
+                    getData = { ...doc.data(), id: doc.id }
+                });
+            console.log(getData)
+            SetDataUser(getData)
+            }
+        } catch (error) {
             
+        }
     }
 
     const searchCommunity = async (searchQuery) => {
@@ -161,9 +178,26 @@ export const AuthContextProvider = ({ children }) => {
 
     }
 
+    useEffect(() => {
+        async function checkAuth() {
+            onAuthStateChanged(auth, (user) => {
+                if(user) {
+                    console.log("Success")
+                    getDataSendiri()
+                } else {
+                    console.log("Failed")
+                    router.push('/personal/login')
+                }
+            })
+        }
+
+        checkAuth()
+        
+      }, [authFirebase]);
+
 
     return (
-        <PersonalAuthContext.Provider value={{ updateProfileData, searchCommunity }}>
+        <PersonalAuthContext.Provider value={{ updateProfileData, searchCommunity, getDataSendiri, dataUser }}>
             {children}
         </PersonalAuthContext.Provider>
     )

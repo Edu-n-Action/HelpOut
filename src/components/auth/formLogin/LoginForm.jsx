@@ -51,8 +51,10 @@ function LoginForm({ community = true }) {
     try {
       if (community) {
         await emailSignInCommunity(signinData.email, signinData.password);
+        router.push('/community/home')
       } else {
         await emailSignInPersonal(signinData.email, signinData.password)
+        router.push('/personal/home')
       }
     } catch (error) {
       console.log(error.message);

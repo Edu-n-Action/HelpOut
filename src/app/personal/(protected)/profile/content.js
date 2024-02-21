@@ -5,12 +5,19 @@ import PersonalHeader from "@/components/common/communityProfile/personalHeader"
 import Link from "next/link";
 import Community from "../community/page";
 
+import { useRouter } from "next/navigation";
+import { GlobalAuth } from "@/Context/GlobalContext";
 const Content = ({
   data = {
     community: "Komunitas Sekolah Marjinal",
   },
 }) => {
-  const logout = () => {};
+  const router = useRouter()
+  const {emailLogOut} = GlobalAuth();
+  const logout = () => {
+    emailLogOut()
+    router.push("/")
+  };
   return (
     <div className="aspect-[430/932] w-full md:w-[33%] overflow-y-scroll bg-back flex flex-col items-center">
       <PersonalHeader />
