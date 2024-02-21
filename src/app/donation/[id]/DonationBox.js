@@ -40,7 +40,7 @@ const DonationBox = ({
             </div>
           </div>
           <div className="aspect-[386/30] md:aspect-[360/10] w-full md:text-[1.1vw] flex justify-center items-center text-[3.2vw] mt-[3%] md:mt-[1%] font-semibold">
-            Cerita Donasi Kita
+            Our Donation Story
           </div>
           <div className="w-full h-fit md:text-[1.1vw] text-[3.2vw] mb-[4%] md:mb-[1%]">
             {data.bio}

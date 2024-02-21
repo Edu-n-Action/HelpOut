@@ -65,11 +65,14 @@ function Navbar({ community = false, buttonLink = "" }) {
     <nav className="fixed aspect-[200/54] md:aspect-[200/48] w-[90%] md:w-[33%] items-center bottom-[5%] left-0 right-0 mx-auto z-50">
       {buttonLink !== "" && (
         <div className="relative top-0 left-0 right-0 mx-auto aspect-[190/23] w-[93%]">
-          <button className="absolute right-0 aspect-[1/1] w-[11%] rounded-[50%] bg-greenYellow flex justify-center items-center z-50">
+          <Link
+            href={buttonLink}
+            className="absolute right-0 aspect-[1/1] w-[11%] rounded-[50%] bg-greenYellow flex justify-center items-center z-50"
+          >
             <div className="relative aspect-[1/1] w-[94%]">
               <Image src={"/icon/add.svg"} alt={""} fill />
             </div>
-          </button>
+          </Link>
         </div>
       )}
 

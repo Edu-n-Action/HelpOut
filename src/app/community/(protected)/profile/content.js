@@ -12,11 +12,11 @@ const Content = ({ data }) => {
         onClick={logout}
         className="text-[3vw] md:text-[1vw] aspect-[114/32] w-[29.4%] bg-greenYellow rounded-[3%/12%]"
       >
-        Ganti Akun
+        Switch Account
       </button>
       <div className="w-[90%] mt-[10%] flex flex-col">
         <div className="text-[3.6vw] md:text-[1.2vw] font-semibold h-fit">
-          Lainnya
+          Another
         </div>
         <Link
           href={"./profile/edit/"}
@@ -24,7 +24,7 @@ const Content = ({ data }) => {
         >
           <div className="aspect-[371/56] w-[99.5%] flex items-center pl-[5%] bg-back rounded-[2%/12%]">
             <div className="text-[3vw] md:text-[1vw] font-semibold">
-              Pengaturan
+              Settings
             </div>
           </div>
         </Link>

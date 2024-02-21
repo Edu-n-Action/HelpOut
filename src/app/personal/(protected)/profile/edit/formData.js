@@ -18,22 +18,22 @@ export default function FormData(submit) {
   })
   const changeData = (value, key) => {
     SetProfil((old) => {
-      return { ...old, [key]: value }
-    })
-  }
+      return { ...old, [key]: value };
+    });
+  };
   const data = [
-    { title: "Name", type: "text", placeholder: "Masukkan nama", key : "nama" },
+    { title: "Name", type: "text", placeholder: "Insert name", key: "nama" },
     {
       title: "Birthdate",
       type: "date",
-      placeholder: "Masukkan tanggal lahir",
-      key : "ttl"
+      placeholder: "Insert birthdate",
+      key: "ttl",
     },
     {
       title: "Location",
       type: "text",
-      placeholder: "Masukkan lokasi",
-      key : "lokasi"
+      placeholder: "Insert location",
+      key: "lokasi",
     },
   ];
   const tes = async (e) => {
