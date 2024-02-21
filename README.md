@@ -26,10 +26,12 @@ For volunteering members, the web app allows them to:
 
 ## Tech Stack
 
-- Next.js
-  Next.js is used in order to build the front-end side of the web app. It is one of the most frequently used framework in the field of web-development. Additionally, it is one of the simplest ones to implement
 - Firebase
   Firebase is used for the back end and the database. We store all users, communities, events, and donations data into it. Firebase is used because of simple implementation, robust built-in feature, secure server, and it is in the cloud
+- Next.js
+  Next.js is used in order to build the front-end side of the web app. It is one of the most frequently used framework in the field of web-development. Additionally, it is one of the simplest ones to implement
+- Tailwindcss
+  Tailwindcss is a css framework to speed up the development time of the app due to the simplicity of the syntax. We use it to fasten the development time
 
 ## Prerequisites
 
