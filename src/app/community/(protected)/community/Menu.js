@@ -21,7 +21,7 @@ const Menu = () => {
       <div className="aspect-[430/419] w-full flex justify-center">
         {menu === 0 && <CommunityEvents />}
         {menu === 1 && <CommunityMember />}
-        {menu === 2 && <Materials />}
+        {menu === 2 && <Materials add={true} />}
       </div>
     </div>
   );
