@@ -45,11 +45,16 @@ For volunteering members, the web app allows them to:
   > ```
   > npm run dev
   > ```
-- Then we can open the web app on `<http://localhost:3000>` to see the result.
+- Then we can open the web app on `http://localhost:3000` to see the result.
+
+### Login / Sign Up
+
+- Go to the main page
+- Click login / sign up
 
 ## Deployment
 
-We also have already provided the web app on `<link>`
+We also have already provided the web app on `https://helpout-id.vercel.app/`
 
 ## Teams
 
