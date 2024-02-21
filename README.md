@@ -54,7 +54,7 @@ For volunteering members, the web app allows them to:
 
 ## Deployment
 
-We also have already provided the web app on`[https://github.com/Edu-n-Action/HelpOut](https://github.com/Edu-n-Action/HelpOut)
+We also have already provided the web app on [https://github.com/Edu-n-Action/HelpOut](https://github.com/Edu-n-Action/HelpOut)
 
 ## Teams
 
