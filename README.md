@@ -4,27 +4,7 @@ HelpOut is a comprehensive platform for community management. With features to a
 
 ## About
 
-HelpOut is a web application build by using for managing
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Our project aims to solve the hassle of running volunteering communities through a web-application solution. Notable features include forming events, organizing donations/fundraising, managing daily tasks for individual volunteers, and more. It is hoped that our web application can accelerate the operations of volunteering communities everywhere, who are positively impacting the lives around them.
 
 ## Watch the Trailer
 
@@ -46,10 +26,10 @@ For volunteering members, the web app allows them to:
 
 ## Tech Stack
 
-- Javascript
-  Javascript is used in order to build the front-end side of the web app
+- Next.js
+  Next.js is used in order to build the front-end side of the web app. It is one of the most frequently used framework in the field of web-development. Additionally, it is one of the simplest ones to implement
 - Firebase
-  Firebase is used for the back end and the database. We store all users, communities, events, and donations data into it.
+  Firebase is used for the back end and the database. We store all users, communities, events, and donations data into it. Firebase is used because of simple implementation, robust built-in feature, secure server, and it is in the cloud
 
 ## How to use it?
 
@@ -65,15 +45,15 @@ For volunteering members, the web app allows them to:
   > ```
   > npm run dev
   > ```
-- Then we can open the web app on `http://localhost:3000` to see the result.
+- Then we can open the web app on `<http://localhost:3000>` to see the result.
 
 ## Deployment
 
-We also have already deployed the web app on
+We also have already provided the web app on `<link>`
 
 ## Teams
 
-- Salman Faiz Hidayat
-- Ken Bima Satria Gandasasmita
-- Wafi Afdi Alfaruqi
-- Polikarpus Arya Pradhanika
+- Salman Faiz Hidayat (Hustler)
+- Ken Bima Satria Gandasasmita (Hipster)
+- Wafi Afdi Alfaruqi (Hacker)
+- Polikarpus Arya Pradhanika (Hacker)
