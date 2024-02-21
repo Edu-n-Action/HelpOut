@@ -15,6 +15,7 @@ const CommunityAuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
     const auth = getAuth();
     const router = useRouter();
+    const [dataUser, SetDataUser] = useState(null);
     const { authFirebase, emailLogOut, setAuthFirebase } = GlobalAuth();
 
 
@@ -293,6 +294,26 @@ export const AuthContextProvider = ({ children }) => {
         })
     }
 
+    const getDataSendiri = async () => {
+        try {
+            if(authFirebase == null) {
+                return
+            } else {
+            let getData;
+                const q = query(collection(db, 'community'), where('userID', '==', authFirebase.uid));
+                const querySnapshot = await getDocs(q);
+                querySnapshot.forEach((doc) => {
+                    // You can access the document data here
+                    getData = { ...doc.data(), id: doc.id }
+                });
+            console.log(getData)
+            SetDataUser(getData)
+            }
+        } catch (error) {
+            
+        }
+    }
+
 
     const value = {
         updateProfileData,
@@ -300,7 +321,9 @@ export const AuthContextProvider = ({ children }) => {
         uploadNewEvent,
         uploadBukuPanduan,
         rejectMember,
-        addMember
+        addMember,
+        dataUser,
+        getDataSendiri
     };
 
     useEffect(() => {
@@ -308,6 +331,7 @@ export const AuthContextProvider = ({ children }) => {
             onAuthStateChanged(auth, (user) => {
                 if(user) {
                     console.log("Success")
+                    getDataSendiri()
                 } else {
                     console.log("Failed")
                     router.push('/community/login')

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Navbar from "../homepage/navbar/Navbar";
 
 import { PersonalAuth } from "@/Context/PersonalAuthContext";
+import { CommunityAuth } from "@/Context/CommunityAuthContext";
 
 
 const NotifBlock = ({ message }) => {
@@ -33,7 +34,14 @@ const Notif = ({
     "You have been assigned to event B",
   ],
 }) => {
-  const { getDataSendiri, dataUser } = PersonalAuth();
+  const { dataUser } = () => {
+    if(community) {
+      return CommunityAuth()
+    } else {
+      PersonalAuth()
+    }
+  }
+  
   return (
     <div className="w-full h-full min-h-screen bg-back overflow-auto">
       <Navbar community={community} />

@@ -1,21 +1,24 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+
 import InputImage from "@/components/common/input/inputImage";
 import Image from "next/image";
 
 import { CommunityAuth } from "@/Context/CommunityAuthContext";
 
 export default function FormData(submit) {
-  const { updateProfileData } = CommunityAuth();
+  const { updateProfileData, dataUser } = CommunityAuth();
+  const router = useRouter()
 
   const [profil, SetProfil] = useState({
-    header: undefined,
-    gambar: undefined,
-    nama: undefined,
-    lokasi: undefined,
-    bio: undefined
+    gambar: {file : dataUser?.profileDownload || undefined, local: false},
+    header: {file: dataUser?.headerDownload || undefined, locall:false},
+    nama: dataUser?.nama || "",
+    lokasi: dataUser?.lokasi || "",
+    bio: dataUser?.bio || "",
+    ttl: dataUser?.ttl || ""
   })
-  console.log(profil)
   const changeData = (value, key) => {
     SetProfil((old) => {
       return { ...old, [key]: value }
@@ -35,10 +38,25 @@ export default function FormData(submit) {
     try {
       await updateProfileData(profil.nama, profil.bio, profil.lokasi, profil.header, profil.gambar)
       console.log("SUCCESS")
+      router.push("/community/profile")
     } catch (error) {
       console.log(error)
       console.log("Failed")
     }
+
+    useEffect(() => {
+      SetProfil(old => {
+        return {
+          gambar: {file : dataUser?.profileDownload || undefined, local: false},
+            header: {file: dataUser?.headerDownload || undefined, locall:false},
+            nama: dataUser?.nama || "",
+            lokasi: dataUser?.lokasi || "",
+            bio: dataUser?.bio || "",
+            ttl: dataUser?.ttl || ""
+        }
+        
+      })
+    },[dataUser])
 
   };
   return (

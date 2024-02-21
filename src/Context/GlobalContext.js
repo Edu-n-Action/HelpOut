@@ -48,7 +48,7 @@ export const FirebaseContextProvider = ({ children }) => {
             })
             
         } catch (error) {
-            console.log(error.message)
+            alert(error.message)
         }
     };
 
@@ -70,7 +70,7 @@ export const FirebaseContextProvider = ({ children }) => {
             })
             
         } catch (error) {
-            console.log(error.message)
+            alert(error.message)
         }
     };
 
