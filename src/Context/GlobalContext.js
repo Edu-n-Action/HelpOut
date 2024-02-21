@@ -11,12 +11,15 @@ const FirebaseAuthContext = createContext();
 
 export const FirebaseContextProvider = ({ children }) => {
     const [authFirebase, setAuthFirebase] = useState(null)
-
+    console.log(authFirebase)
     useEffect(() => {
-
+        
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setAuthFirebase(currentUser);
+            setAuthFirebase(currentUser);   
         });
+        if(authFirebase == null) {
+            
+        }
 
         return () => unsubscribe();
     }, [authFirebase]);
@@ -33,6 +36,8 @@ export const FirebaseContextProvider = ({ children }) => {
                 const querySnapshot = await getDocs(q);
                 const data = querySnapshot.docs.map(doc => doc.data());
                 setAuthFirebase(userCredential.user)
+                console.log(data)
+                console.log("LOGIN")
             }
             )
         } catch (error) {
@@ -69,7 +74,7 @@ export const FirebaseContextProvider = ({ children }) => {
                     email: user.email,
                     userID: user.uid,
                     member: [],
-                    waitingList: [],
+                    pendingMember: [],
                     donations: [],
                     events: [],
                     profileFilled: false
@@ -87,29 +92,33 @@ export const FirebaseContextProvider = ({ children }) => {
     };
 
     const emailSignUpPersonal = async (email, password) => {
-        createUserWithEmailAndPassword(auth, email, password)
-        await createUserWithEmailAndPassword(auth, email, password)
-            .then(async (userCredential) => {
-                // Signed up 
-                const user = userCredential.user;
-                const Collection = collection(db, 'User')
-                const documentData = {
-                    email: user.email,
-                    userID: user.uid,
-                    eventDiikuti: [],
-                    communityDiikuti: null,
-                    pendingCommunity: null,
-                    profileFilled: false
-                }
-                const newData = await addDoc(Collection, documentData)
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorMessage)
-                // ..
-            });
+        try {
+            await createUserWithEmailAndPassword(auth, email, password)
+                .then(async (userCredential) => {
+                    // Signed up 
+                    const user = userCredential.user;
+                    const Collection = collection(db, 'User')
+                    const documentData = {
+                        email: user.email,
+                        userID: user.uid,
+                        eventDiikuti: [],
+                        community: null,
+                        pendingCommunity: null,
+                        profileFilled: false
+                    }
+                    const newData = await addDoc(Collection, documentData)
+                    console.log("Account Created")
+                    // ...
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log(errorMessage)
+                    // ..
+                });
+        } catch (error) {
+            console.log(error)
+        }
     };
 
     // TODO

@@ -226,12 +226,75 @@ export const AuthContextProvider = ({ children }) => {
 
     // Add member
     const addMember = async (idMember) => {
+        let getData;
+        const q = query(collection(db, 'community'), where('userID', '==', authFirebase.uid));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            // You can access the document data here
+            getData = { ...doc.data(), id: doc.id }
+        });
+
+        const filteredUser = getData.pendingMember.filter((ref) => {
+            const parts = ref.split("/");
+            return parts[1] == idMember 
+        })
+
+        const newListPending = getData.pendingMember.filter((ref) => {
+            const parts = ref.split("/");
+            return parts[1] != idMember 
+        })
+
+        if (filteredUser.length == 0 ) {
+            console.log("No User Found")
+            return
+        }
+        const userID = filteredUser[0].split("/")
+        const userRef = doc(db, "User", userID[1])
+        const communityRef = doc(db, "community", getData.id)
+        await updateDoc(userRef, {
+            pendingCommunity : null,
+            community : communityRef
+        })
+
+        await updateDoc(communityRef, {
+            pendingMember : newListPending,
+            member : [...getData.member, userRef]
+        })
 
     }
 
     // Reject Member
     const rejectMember = async (idMember) => {
+        let getData;
+        const q = query(collection(db, 'community'), where('userID', '==', authFirebase.uid));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            // You can access the document data here
+            getData = { ...doc.data(), id: doc.id }
+        });
 
+        const filteredUser = getData.pendingMember.filter((ref) => {
+            const parts = ref.split("/");
+            return parts[1] == idMember 
+        })
+
+        const newListPending = getData.pendingMember.filter((ref) => {
+            const parts = ref.split("/");
+            return parts[1] != idMember 
+        })
+
+        if (filteredUser.length == 0 ) {
+            console.log("No User Found")
+            return
+        }
+        const userID = filteredUser[0].split("/")
+        const userRef = doc(db, "User", userID[1])
+        const communityRef = doc(db, "community", getData.id)
+        
+        await updateDoc(userRef, {
+            pendingCommunity : null,
+            community : communityRef
+        })
     }
 
 
@@ -239,7 +302,9 @@ export const AuthContextProvider = ({ children }) => {
         updateProfileData,
         uploadDonationLink,
         uploadNewEvent,
-        uploadBukuPanduan
+        uploadBukuPanduan,
+        rejectMember,
+        addMember
     };
 
 

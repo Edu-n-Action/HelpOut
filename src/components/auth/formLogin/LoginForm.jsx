@@ -51,6 +51,8 @@ function LoginForm({ community = true }) {
     try {
       if (community) {
         await emailSignInCommunity(signinData.email, signinData.password);
+      } else {
+        await emailSignInPersonal(signinData.email, signinData.password)
       }
     } catch (error) {
       console.log(error.message);

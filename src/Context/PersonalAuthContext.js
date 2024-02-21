@@ -1,9 +1,10 @@
 "use client"
 import { useContext, createContext, useState, useEffect } from "react";
 
-import { db } from '@/app/firebase'
+import { db, auth, storage } from '@/app/firebase'
 import { getFirestore, collection, query, where, getDocs, addDoc, updateDoc, doc, orderBy, limit, startAt, endAt } from 'firebase/firestore'
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, setPersistence, browserSessionPersistence } from "firebase/auth";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 
 
 import { useRouter } from "next/navigation";
@@ -14,20 +15,24 @@ const PersonalAuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
     const router = useRouter();
+    const [dataUser, SetDataUser] = useState(null);
     const { authFirebase } = GlobalAuth();
 
-    const getUserData = async () => {
+    useEffect(() => {
+        console.log(authFirebase)
+      }, [authFirebase]);
 
-    }
-
-    /* useEffect(() => {
-        if(authFirebase == null) {
-            router.push("http://localhost:3000/personal/login")
-        }
-      }, []); */
-
-    const updateProfileData = async (nama, bio, ttl, lokasi) => {
+    const updateProfileData = async (nama, bio, ttl, lokasi, profileImage) => {
         try {
+            const MAX_FILE_SIZe = 5 * 1024 * 1024;
+            const profileRefStorage = ref(storage, "profilePicture/" + authFirebase.uid + "-Profile")
+            if (profileImage.size >= MAX_FILE_SIZe) {
+                throw Error("File Size Limit Reached")
+            }
+
+            const snapshotProfile = await uploadBytes(profileRefStorage, profileImage);
+            const profileID = snapshotProfile.ref.name;
+
             let getData;
             const q = query(collection(db, 'User'), where('userID', '==', authFirebase.uid));
             const querySnapshot = await getDocs(q);
@@ -42,12 +47,19 @@ export const AuthContextProvider = ({ children }) => {
                     nama: nama,
                     bio: bio,
                     ttl: ttl,
-                    lokasi: lokasi
+                    lokasi: lokasi,
+                    profileImageRef : profileID,
+                    profileDownload : await getDownloadURL(profileRefStorage)
+
                 }
             )
         } catch (error) {
             console.log("Error updating document : ", error.message)
         }
+    }
+
+    const getDataSendiri = async () => {
+            
     }
 
     const searchCommunity = async (searchQuery) => {
@@ -101,7 +113,23 @@ export const AuthContextProvider = ({ children }) => {
     }
 
     const applyCommunity = async (idCommunity) => {
+        let getData;
+        const q = query(collection(db, 'User'), where('userID', '==', authFirebase.uid));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            // You can access the document data here
+            getData = { ...doc.data(), id: doc.id }
+        });
 
+        const communityRef = doc(db, "community", idCommunity);
+        const userRef = doc(db, "User", getData.id)
+        await updateDoc(userRef, {
+            pendingCommunity: communityRef,
+            
+        })
+        await updateDoc(communityDoc, {
+
+        })
     }
 
     const leaveCommunity = async (idCommunity) => {

@@ -23,13 +23,13 @@ export default function Home() {
         <div className="aspect-[150/75] md:aspect-[150/60] w-[50%] flex flex-col justify-between mt-[16%] text-[4.5vw] md:text-[1.5vw]">
           <Link
             className="bg-[#CEFD4A] aspect-[150/30] md:aspect-[150/25] rounded-[3%/12%] w-full z-[10] flex justify-center items-center outline-0 text-center"
-            href={"/personal/"}
+            href={"/personal/login"}
           >
             For Personal
           </Link>
           <Link
             className="bg-[#CEFD4A] aspect-[150/30] md:aspect-[150/25] rounded-[3%/12%] w-full z-[10] flex justify-center items-center outline-0 text-center"
-            href={"/community/"}
+            href={"/community/login"}
           >
             For Community
           </Link>

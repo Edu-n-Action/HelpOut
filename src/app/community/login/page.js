@@ -19,7 +19,7 @@ function page() {
         </button>
         <p className="text-3xl mt-14">
           Dont have an account?{" "}
-          <a href="/" className="font-bold hover:cursor-pointer">
+          <a href="/community/signup" className="font-bold hover:cursor-pointer">
             Sign Up
           </a>
         </p>

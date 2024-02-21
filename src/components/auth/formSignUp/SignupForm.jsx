@@ -9,7 +9,7 @@ import { GlobalAuth } from "@/Context/GlobalContext";
 
 import { db } from "@/app/firebase";
 function SignupForm({ community = true }) {
-  const { emailSignUpCommunity } = GlobalAuth();
+  const { emailSignUpCommunity, emailSignUpPersonal } = GlobalAuth();
   const [signupData, SetSignup] = useState({
     email: undefined,
     password: undefined,
@@ -39,6 +39,8 @@ function SignupForm({ community = true }) {
     try {
       if (community) {
         emailSignUpCommunity(signupData.email, signupData.password);
+      } else {
+        emailSignUpPersonal(signupData.email, signupData.password);
       }
     } catch (error) {
       console.log(error.message);
@@ -75,7 +77,7 @@ function SignupForm({ community = true }) {
       />
       <button
         className="bg-[#CEFD4A] py-3 w-full z-[10] text-center text-xl mt-9"
-        href={"/"}
+        href={"/signup"}
         type="submit"
       >
         Sign Up

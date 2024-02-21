@@ -1,5 +1,5 @@
 "use client";
-
+import React, { useState } from "react";
 import InputImage from "@/components/common/input/inputImage";
 import Image from "next/image";
 
@@ -7,22 +7,36 @@ import { PersonalAuth } from "@/Context/PersonalAuthContext";
 
 export default function FormData(submit) {
   const { updateProfileData } = PersonalAuth()
+  const [profil, SetProfil] = useState({
+    gambar: undefined,
+    nama: undefined,
+    lokasi: undefined,
+    bio: undefined,
+    ttl: undefined
+  })
+  const changeData = (value, key) => {
+    SetProfil((old) => {
+      return { ...old, [key]: value }
+    })
+  }
   const data = [
-    { title: "Name", type: "text", placeholder: "Masukkan nama" },
+    { title: "Name", type: "text", placeholder: "Masukkan nama", key : "nama" },
     {
       title: "Birthdate",
       type: "date",
       placeholder: "Masukkan tanggal lahir",
+      key : "ttl"
     },
     {
       title: "Location",
       type: "text",
       placeholder: "Masukkan lokasi",
+      key : "lokasi"
     },
   ];
   const tes = (e) => {
     e.preventDefault()
-    //updateProfileData("Wafi Afdi Alfaruqhi", "Saya Wafi", new Date("12-11-2004"), "Yogyakarta")
+    updateProfileData(profil.nama, profil.bio, new Date(profil.ttl), profil.lokasi)
   };
   return (
     <form
@@ -32,6 +46,8 @@ export default function FormData(submit) {
       <InputImage
         className="aspect-[1/1] w-[30%] rounded-[15%/15%]"
         add={true}
+        SetValue={(value) => {changeData(value, "gambar")}}
+        value={profil.gambar}
       />
 
       <div className="flex flex-col aspect-[379/496] w-[100%] justify-around">
@@ -53,6 +69,8 @@ export default function FormData(submit) {
                   className="w-full aspect-[379/29] rounded-[2%/25%] pl-[2%] pr-[3%]"
                   placeholder={item.placeholder}
                   type={item.type}
+                  value={profil[item.key]}
+                  onChange={(e) => changeData(e.target.value, item.key)}
                 />
               </div>
             </div>
@@ -68,6 +86,8 @@ export default function FormData(submit) {
             rows="4"
             cols="50"
             placeholder="Masukkan bio"
+            value={profil.bio}
+            onChange={(e) => changeData(e.target.value, "bio")}
           ></textarea>
         </div>
         <div className="aspect-[379/60] w-[100%] flex justify-between text-[4.8vw] md:text-[2vw]">
