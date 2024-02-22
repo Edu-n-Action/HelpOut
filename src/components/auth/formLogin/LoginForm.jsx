@@ -88,13 +88,13 @@ function LoginForm({ community = true }) {
       >
         Login
       </button>
-      <button
+      {/* <button
         className="bg-[#CEFD4A] py-3 w-full z-[10] text-center text-xl mt-9"
         type="button"
         onClick={(e) => emailLogOut()}
       >
         Logout
-      </button>
+      </button> */}
     </form>
   );
 }

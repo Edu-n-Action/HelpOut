@@ -59,7 +59,8 @@ export const AuthContextProvider = ({ children }) => {
                                     profileDownload: await getDownloadURL(profileRefStorage),
                                     nama: nama,
                                     bio: bio,
-                                    lokasi: lokasi
+                                    lokasi: lokasi,
+                                    profileFilled : true
                                 }
                             )
                             console.log("Data updated")
@@ -306,8 +307,10 @@ export const AuthContextProvider = ({ children }) => {
                     // You can access the document data here
                     getData = { ...doc.data(), id: doc.id }
                 });
-            console.log(getData)
             SetDataUser(getData)
+            if(getData.profileFilled) {
+
+            } else router.push("/community/profile/edit")
             }
         } catch (error) {
             

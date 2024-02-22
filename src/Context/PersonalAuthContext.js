@@ -50,7 +50,8 @@ export const AuthContextProvider = ({ children }) => {
                     ttl: ttl,
                     lokasi: lokasi,
                     profileImageRef : profileID,
-                    profileDownload : await getDownloadURL(profileRefStorage)
+                    profileDownload : await getDownloadURL(profileRefStorage),
+                    profileFilled : true
 
                 }
             )
@@ -71,8 +72,11 @@ export const AuthContextProvider = ({ children }) => {
                     // You can access the document data here
                     getData = { ...doc.data(), id: doc.id }
                 });
-            console.log(getData)
+            // console.log(getData)
             SetDataUser(getData)
+            if(getData.profileFilled) {
+
+            } else router.push("/personal/profile/edit")
             }
         } catch (error) {
             
